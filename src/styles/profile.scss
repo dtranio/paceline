@@ -1,0 +1,151 @@
+.profile {
+    @include headerSetup();
+    position: relative;
+    &--back {
+        height: 260px;
+        width: 100%;
+        background-image: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
+        a {
+            position: absolute;
+            top: 2%;
+            left: 5%;
+        }
+    }
+    &__user {
+        width: 100%;
+        text-align: center;
+        &--general {
+            display: flex;
+            justify-content: center;
+            & h1:first-child {
+                margin-right: 5px;
+                margin-bottom: 10px;
+            }
+        }
+        h1 {
+            color: white;
+            text-shadow: 3px 2px 2px rgba(59, 57, 57, 0.6);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        h2 {
+            color: white;
+            text-shadow: 2px 2px 1px rgba(59, 57, 57, 0.6);
+            font-size: 1rem;
+            margin: 0;
+            margin-top: 5px;
+        }
+        img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 2px solid white;
+            filter: drop-shadow(1px 1px 5px rgb(255, 247, 247));
+        }
+    }
+    &__button {
+        display: flex;
+        justify-content: center;
+        margin-top: -18px;
+        text-decoration: none;
+        &--style {
+            width: 130px;
+            padding: 10px;
+            border-radius: 4px;
+            height: 35px;
+            background: steelblue;
+            border: 1px solid white;
+            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+            color: white;
+            &:hover {
+                background: tomato;
+            }
+        }
+        &--add {
+            margin-right: 20px;
+        }
+    }
+    .userDetails {
+        p {
+            font-family: $secondaryFont;
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: white;
+        }
+        &__bikeOwned {
+            display: flex;
+            margin-top: 25px;
+            height: 50px;
+            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+            img {
+                padding-top: 7px;
+                padding-left: 12px;
+                width: 100%;
+                height: 70%;
+            }
+            &--container {
+                margin-right: 25px;
+                width: 10%;
+            }
+        }
+        &__bio {
+            display: flex;
+            margin-top: 20px;
+            height: 120px;
+            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+            &--container {
+                margin-right: 25px;
+                width: 10%;
+            }
+            h3 {
+                color: white;
+                font-weight: 100;
+            }
+            img {
+                padding-top: 15px;
+                padding-left: 12px;
+                height: 25%;
+            }
+        }
+        &__interests {
+            display: flex;
+            margin-top: 20px;
+            height: 90px;
+            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+            &--container {
+                margin-right: 25px;
+                width: 10%;
+            }
+            img {
+                padding-top: 15px;
+                padding-left: 12px;
+                height: 40%;
+            }
+        }
+    }
+    .friendsList {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        a {
+            margin: 0;
+            display: flex;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 47%;
+            height: 250px;
+            position: relative;
+            border-radius: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+        }
+    }
+}

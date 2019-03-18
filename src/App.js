@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Login from './Components/Login';
+import Home from './Components/Home';
+import CyclistList from './Components/CyclistList';
+import GroupRides from './Components/GroupRides';
+import Profile from './Components/Profile';
+import BikeRoutes from './Components/BikeRoutes';
+import BikeRoute from './Components/BikeRoute';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    state = {
+        
+    }
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <Switch>
+                        <Route exact path="/" component={Login}/>
+                        <Route exact path="/home" component={Home}/>
+                        <Route exact path="/cyclists" component={CyclistList}/>
+                        <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props}/>)} />
+                        <Route exact path="/groups" component={GroupRides}/>
+                        <Route exact path="/bikeroutes" component={BikeRoutes}/>
+                        <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props}/>)} />
+                    </Switch>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;

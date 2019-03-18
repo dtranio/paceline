@@ -1,0 +1,76 @@
+.login {
+    background: url('/Assets/images/loginBack.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+    &__logo {
+        text-align: center;
+        img {
+            margin-top: 30px;
+            width: 30%;
+        }
+    }
+    .loginForm {
+        margin-top: 20px;
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input {
+            height: 30px;
+            border: none;
+        }
+        &__username {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            width: 55%;
+            &--text {
+                font-family: $font;
+                border-radius: 2px;
+                padding-left: 10px;
+                font-size: 0.9rem;
+            }
+        }
+        &__password {
+            display: flex;
+            flex-direction: column;
+            width: 55%;
+            &--text {
+                font-family: $font;
+                border-radius: 2px;
+                padding-left: 10px;
+                font-size: 0.9rem;
+            }
+        }
+        &__submit {
+            font-family: $font;
+            text-decoration: none;
+            background: steelblue;
+            color: white;
+            border: none;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            height: 35px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 1px 1px gray;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+            width: 55%;
+        }
+        button {
+            font-family: $font;
+            border: none;
+            color: white;
+            background: rgb(9, 119, 68);
+            margin-top: 10px;
+            height: 35px;
+            box-shadow: 1px 1px 1px 1px gray;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            width: 55%;
+        }
+    }
+}
