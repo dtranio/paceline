@@ -8,7 +8,7 @@ export default class BikeRoutes extends Component {
             <div className="home">
                 <div className="userSelectRow wrapper">
                     <div className="cyclistList__header">
-                        <Link to='/home'><img src="/Assets/images/Icons/back-arrow.png" alt=""/></Link>
+                        <Link to='/home'><img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/></Link>
                         <h1 className="home__title">Popular Bike Routes</h1>
                     </div>
                     <Link to='/bikeroutes/R1'>

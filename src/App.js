@@ -7,6 +7,7 @@ import GroupRides from './Components/GroupRides';
 import Profile from './Components/Profile';
 import BikeRoutes from './Components/BikeRoutes';
 import BikeRoute from './Components/BikeRoute';
+import GroupRide from './Components/GroupRide';
 
 class App extends Component {
     state = {
@@ -21,7 +22,8 @@ class App extends Component {
                         <Route exact path="/home" component={Home}/>
                         <Route exact path="/cyclists" component={CyclistList}/>
                         <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props}/>)} />
-                        <Route exact path="/groups" component={GroupRides}/>
+                        <Route exact path="/groups" render={props => (<GroupRides {...props}/>)} />
+                        <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props}/>)} />
                         <Route exact path="/bikeroutes" component={BikeRoutes}/>
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props}/>)} />
                     </Switch>
