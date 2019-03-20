@@ -12,31 +12,31 @@ export default class BikeRoute extends Component {
     render() {
         const DirectionsService = new google.maps.DirectionsService();
         DirectionsService.route({   
-            origin: 'Davisville', 
-            destination: 'The Distillery Historic District',   
+            origin: 'Cherry Beach Clarke Beach Park', 
+            destination: 'Tommy Thompson Lighthouse',  
             travelMode: google.maps.TravelMode.BICYCLING,   
             },  
             (response, status) => {   
                 if (status === google.maps.DirectionsStatus.OK) {   
                     const coordinates = response.routes[0].overview_path;   
-                    this.setState({   
+                    this.setState({
                         pathCoordinates: coordinates,
                     });
                 }
         });
-        const Map = withGoogleMap(props => (
+        const Map = withGoogleMap(() => (
             <GoogleMap
-              defaultCenter = { { lat: 43.69062, lng: -79.3709} }
-              defaultZoom = { 13 }
-              defaultOptions={{
-                scaleControl: false,
-                mapTypeControl: false,
-                streetViewControl: false,
-                gestureHandling: 'greedy',
-                panControl: true,
-                zoomControl: true,
-                rotateControl: false,
-                fullscreenControl: false
+                defaultCenter = { { lat: 43.630033, lng: -79.327822} }
+                defaultZoom = { 12 }
+                defaultOptions={{
+                    scaleControl: false,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    gestureHandling: 'greedy',
+                    panControl: true,
+                    zoomControl: true,
+                    rotateControl: false,
+                    fullscreenControl: false
               }}
             >
                 <Polyline
@@ -74,8 +74,8 @@ export default class BikeRoute extends Component {
                         </div>
                         <div className="routeDetails__gallery">
                             <h2 className="home__title">Gallery</h2>
-                            <img src="/Assets/images/BikeRoutes/beltline/1.jpg" alt=""/>
-                            <img src="/Assets/images/BikeRoutes/beltline/2.png" alt=""/>
+                            <img src="/Assets/images/BikeRoutes/beltline/1.jpg" alt="trail image"/>
+                            <img src="/Assets/images/BikeRoutes/beltline/2.png" alt="trail image"/>
                         </div>
                     </div>
                 </div>
