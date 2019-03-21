@@ -17,7 +17,7 @@ export default class Home extends Component {
                     <Link to='/bikeroutes'>
                         <Select position="selection__titleLeft" imageUrl="/Assets/images/findroutes.jpg" title="Discover Bike Trails"/>
                     </Link>
-                    <Link to='/cyclists/hi'>
+                    <Link to='/cyclists/5c92d64d7214992360212833'>
                         <Select position="selection__titleRight" imageUrl="/Assets/images/profile.jpg" title="My Profile"/>
                     </Link>
                 </div>

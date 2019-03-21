@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import GroupSelect from './GroupSelect';
-import axios from 'axios';
 
 export default class GroupRides extends Component {
     render() {

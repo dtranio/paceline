@@ -66,6 +66,8 @@ export default class GroupRide extends Component {
                         <Select position="selection__titleRight" imageUrl="/Assets/images/BikeRoutes/beltline.jpg" title="Beltline-Lower Don Valley"/>
                     </Link>
                     <div className="groupDetails__description">
+                        <h2>Description</h2>
+                        <p>3 hours</p>
                         <h2>Length</h2>
                         <p>3 hours</p>
                         <h2>Date & Time</h2>

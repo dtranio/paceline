@@ -59,23 +59,22 @@ export default class BikeRoute extends Component {
                 <div className="routeContainer wrapper">
                     <div className="cyclistList__header">
                         <Link to='/bikeroutes'><img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/></Link>
-                        <h1 className="home__title">Beltline-Lower Don Valley</h1>
+                        <h1 className="home__title">Leslie Street Spit</h1>
                     </div>
                     <div className="routeDetails">
-                        <Select position="selection__titleRight" imageUrl="/Assets/images/BikeRoutes/beltline.jpg" />
+                        <Select position="selection__titleRight" imageUrl="/Assets/images/BikeRoutes/leslie.jpeg" />
                         <div className="routeDetails__description">
                             <h2>Distance</h2>
-                            <p>10km</p>
+                            <p>7.5km</p>
                             <h2>Recommended Bike Type</h2>
-                            <p>Mountain</p>
+                            <p>Road</p>
                             <h2>About the Route</h2>
-                            <p>The Beltline Trail is a nine-kilometre path where walkers, joggers, and bikers can traverse the city 
-                            from west to east, weaving in and out of neighbourhoods along midtown Toronto.</p>
+                            <p>The 5-km long peninsula – within minutes of downtown Toronto – is a surprise to many Toronto visitors. There are lagoons, bird sanctuaries, coves, wetlands, ponds, wildlife preservation projects, note-worthy examples of land reclamation – and a bona fide lighthouse. Best of all, this trail provides a great scenic view of the Toronto skyline!</p>
                         </div>
                         <div className="routeDetails__gallery">
                             <h2 className="home__title">Gallery</h2>
-                            <img src="/Assets/images/BikeRoutes/beltline/1.jpg" alt="trail image"/>
-                            <img src="/Assets/images/BikeRoutes/beltline/2.png" alt="trail image"/>
+                            <img src="/Assets/images/BikeRoutes/leslie/1.jpeg" alt="trail"/>
+                            <img src="/Assets/images/BikeRoutes/leslie/2.jpg" alt="trail"/>
                         </div>
                     </div>
                 </div>
