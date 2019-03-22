@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Spring } from 'react-spring/renderprops';
 import GroupSelect from './GroupSelect';
 
 export default class GroupRides extends Component {
     render() {
         return (
-            <div className="groupList">
+            <Spring from={{ marginTop: -400 }} to={{ marginTop: 0 }}>
+            { props => (
+            <div className="groupList" style={props}>
                 <div className="groupList__header wrapper">
                     <Link to='/home'><img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/></Link>
                     <h1 className="home__title">Upcoming Group Rides</h1>    
                 </div>
                 <div className="groupContainer wrapper">
-                    <Link to='/groups/G1'>
+                    {this.props.groupList.map(group => {
+                                    return <Link to={`/groups/${group._id}`} key={group._id}>
+                                                <GroupSelect 
+                                                    title={group.group_name} 
+                                                    riders={group.attending.length}
+                                                    date={`${group.meetup_date} @ ${group.meetup_time}`}
+                                                    route="hello"
+                                                    id={group._id} />
+                                            </Link>;
+                                })}
+                    {/* <Link to='/groups/G1'>
                         <GroupSelect title="Da Champs" route="Leslie Street Spit" riders="2" date="04-05-2019"/>
                     </Link>
                     <Link to='/groups/G1'>
@@ -22,7 +35,7 @@ export default class GroupRides extends Component {
                     </Link>
                     <Link to='/groups/G1'>
                         <GroupSelect title="Waterfront Exploration" route="Martin Goodman Trail" riders="6" date="05-04-2019"/>
-                    </Link>
+                    </Link> */}
                 </div>
                 <div className="groupList__button">
                     <Link to='/creategroup'>
@@ -30,6 +43,9 @@ export default class GroupRides extends Component {
                     </Link>
                 </div>
             </div>
+             )
+            }
+        </Spring>
         )
     }
 }

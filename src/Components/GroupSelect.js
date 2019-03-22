@@ -8,7 +8,7 @@ export default class Select extends Component {
                 <h2 className="groupSelection__groupName">{this.props.title}</h2>
                 <h3 className="groupSelection__route">{`${this.props.route}`}</h3>
                 <h3 className="groupSelection__riders">{`Number of Riders: ${this.props.riders}`}</h3>
-                <h3 className="groupSelection__date">{`Date: ${this.props.date}`}</h3>
+                <h3 className="groupSelection__date">{`${this.props.date}`}</h3>
             </div>
         )
     }

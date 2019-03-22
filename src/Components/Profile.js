@@ -6,16 +6,17 @@ import axios from 'axios';
 
 export default class Profile extends Component {
     state = {
-        cyclistInfo: {}
+        cyclistInfo: {},
+        friends: []
     }
     componentDidMount() {
         axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
             .then(cyclist => {
                 this.setState({
                     cyclistInfo: cyclist.data
-                })
+                });
             });
-        }
+    }
     render() {
         const {age, first_name, bio, interests, profile_pic_url, region, bike_owned} = this.state.cyclistInfo
         return (
