@@ -27,18 +27,18 @@ export default class GroupRide extends Component {
         });
         const Map = withGoogleMap(props => (
             <GoogleMap
-              defaultCenter = { { lat: 43.69062, lng: -79.3709} }
-              defaultZoom = { 13 }
-              defaultOptions={{
-                scaleControl: false,
-                mapTypeControl: false,
-                streetViewControl: false,
-                gestureHandling: 'greedy',
-                panControl: true,
-                zoomControl: true,
-                rotateControl: false,
-                fullscreenControl: false
-              }}
+                defaultCenter = { { lat: 43.69062, lng: -79.3709} }
+                defaultZoom = { 13 }
+                defaultOptions={{
+                    scaleControl: false,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    gestureHandling: 'greedy',
+                    panControl: true,
+                    zoomControl: true,
+                    rotateControl: false,
+                    fullscreenControl: false
+                }}
             >
                 <Polyline
                     path={this.state.pathCoordinates}
@@ -71,7 +71,7 @@ export default class GroupRide extends Component {
                         <h2>Length</h2>
                         <p>3 hours</p>
                         <h2>Date & Time</h2>
-                        <p>April 5, 2019 | 4pm</p>
+                        <p>April 5, 2019 @ 4pm</p>
                         <h2>Meeting Spot</h2>
                         <p>Davisville Station</p>
                     </div>
