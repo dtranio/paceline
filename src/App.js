@@ -26,7 +26,6 @@ To Do
 [] Invite to Ride
 [] Login
 [] Group Ride Comments
-[] Pending friend requests
 
 Questions
 -------------
@@ -58,6 +57,7 @@ class App extends Component {
                 this.setState({
                     groupList: groupList.data
                 });
+                console.log(this.state.groupList)
             })
             .catch(error => {
                 console.log(error);
