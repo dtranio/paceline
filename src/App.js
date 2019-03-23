@@ -13,36 +13,41 @@ import axios from 'axios';
 
 /*
 
-To Do
---------------
 SATURDAY
 --------------------------
 [X] List of Upcoming Rides in Profile
     [] FIX - Populating attending and bike route 
 Done By 1PM -------------
 
---------------------------
+
 [X] Remove self from cyclist array
 [X] Hide add friend/message button on own profile
 [X] Hide my upcoming rides on other people's profile
 Done By 2PM -------------
 
---------------------------
-[] Add friend/remove friend
-[] Join Ride/Leave Ride 
+
+[] Remove friend
+[] Add friend
+[] Leave Ride 
+[] Join Ride
 Done By 6PM -------------
 
---------------------------
+
 [] Form to Create a Group 
     [] How to Handle Date? 
 Done by Saturday -------------
 
+
 [] Sort Group List by Date
-[] Invite to Ride AND/OR Group Ride Comments
+[] Invite to Ride 
+[] Group Ride Comments
 [] Delete Group
     [] Need to add group leader to group collection
 Done By Sunday -------------
 
+
+[] Commenting
+Done by Monday -------------
 
 TO FIX
 [] BikeRoutes.js map 
@@ -122,7 +127,7 @@ class App extends Component {
                         <Route exact path="/cyclists" render={props => (<CyclistList {...props} cyclistList={this.state.cyclists}/>)} />
                         <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user}/>)} />
                         <Route exact path="/groups" render={props => (<GroupRides {...props} groupList={this.state.groupList} loggedInAs={this.state.loggedInAs} />)} />
-                        <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} />)} />
+                        <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />
                         <Route exact path="/creategroup" render={props => (<GroupForm {...props} retrieveFormData={this.retrieveFormData} />)} />

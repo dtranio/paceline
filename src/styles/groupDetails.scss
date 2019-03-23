@@ -1,5 +1,16 @@
 .rideDetails {
     background: $background;
+    &__header {
+        &--title {
+            display: flex;
+            align-items: center;
+            img {
+                width: 5%;
+                height: 5%;
+                margin-right: 15px;
+            }
+        }
+    }
     .selection {
         height: 125px;
         width: 100%;

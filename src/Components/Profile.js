@@ -18,7 +18,8 @@ export default class Profile extends Component {
                 this.setState({
                     cyclistInfo: cyclist.data,
                     currentUrl: this.props.match.params.cyclistId,
-                    loaded: true
+                    loaded: true,
+                    friends: false
                 });
                 this.checkFriendship();
             });
@@ -32,31 +33,73 @@ export default class Profile extends Component {
                         currentUrl: this.props.match.params.cyclistId,
                         loaded: true
                     });
+                    this.checkFriendship();
                     window.scroll(0,0);
                 });
         }
     }
     checkFriendship() {
         for (let i = 0; i < this.props.currentUser.friends.length; i++) {
+            console.log(this.props.currentUser.friends[i]._id)
             if (this.props.match.params.cyclistId === this.props.currentUser.friends[i]._id) {
                 console.log("Friends!")
                 this.setState({
                     friends: true
                 })
+                break;
             }
         }
     }
     addRemove = () => {
         if (this.state.friends) {
-            
-            this.setState({
-                friends: false
-            });
+            let friendship = {
+                friendAction: "remove",
+                user: this.props.loggedInAs
+            }
+            let config = {
+                method: "PUT",
+                url: `http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`,
+                data: friendship,
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+            // PUT request
+            axios(config) 
+                .then(response => {
+                    console.log(response.data)
+                    this.setState({
+                        friends: false
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+            }); 
         }
         else {
-            this.setState({
-                friends: true
-            });
+            let friendship = {
+                friendAction: "add",
+                user: this.props.loggedInAs
+            }
+            let config = {
+                method: "PUT",
+                url: `http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`,
+                data: friendship,
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+            // PUT request
+            axios(config) 
+                .then(response => {
+                    console.log(response.data)
+                    this.setState({
+                        friends: true
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+            }); 
         }
     }
     render() {

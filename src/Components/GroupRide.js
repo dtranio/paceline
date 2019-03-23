@@ -10,24 +10,37 @@ export default class GroupRide extends Component {
     state = {
         pathCoordinates: [],
         groupDetails: {},
-        loaded: false
+        loaded: false,
+        joined: false
     }
     componentDidMount() {
         axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
-        .then(group => {
-            this.setState({
-                groupDetails: group.data,
-                loaded: true
+            .then(group => {
+                this.setState({
+                    groupDetails: group.data,
+                    loaded: true
+                });
+                console.log(this.state.groupDetails);
+                this.checkJoined()
             });
-            console.log(this.state.groupDetails);
-        });
+    }
+    checkJoined() {
+        for (let i = 0; i < this.state.groupDetails.attending.length; i++) {
+            if (this.props.loggedInAs === this.state.groupDetails.attending[i]._id) {
+                console.log("Currently Joined")
+                this.setState({
+                    joined: true
+                })
+                break;
+            }
+        }
     }
     render() {
         if (this.state.loaded) {
             console.log(this.state.groupDetails)
             const {group_name, description, expected_duration, meetup_date, meetup_time, meetup_location, attending} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
-            const DirectionsService = new google.maps.DirectionsService();
+            // const DirectionsService = new google.maps.DirectionsService();
             // DirectionsService.route({   
             //     origin: this.state.groupDetails.bike_route.origin, 
             //     destination: this.state.groupDetails.bike_route.destination,   
@@ -41,43 +54,43 @@ export default class GroupRide extends Component {
             //             });
             //         }
             // });
-            const Map = withGoogleMap(props => (
-                <GoogleMap
-                    defaultCenter = { center }
-                    defaultZoom = { 13 }
-                    defaultOptions={{
-                        scaleControl: false,
-                        mapTypeControl: false,
-                        streetViewControl: false,
-                        gestureHandling: 'greedy',
-                        panControl: true,
-                        zoomControl: true,
-                        rotateControl: false,
-                        fullscreenControl: false
-                    }}
-                >
-                    {/* <Polyline
-                        path={this.state.pathCoordinates}
-                        geodesic={true}
-                        options={{
-                            strokeColor: "#ff2527",
-                            strokeOpacity: 0.8,
-                            strokeWeight: 4,
-                        }}
-                    /> */}
-                </GoogleMap>
-            ));
+            // const Map = withGoogleMap(props => (
+            //     <GoogleMap
+            //         defaultCenter = { center }
+            //         defaultZoom = { 13 }
+            //         defaultOptions={{
+            //             scaleControl: false,
+            //             mapTypeControl: false,
+            //             streetViewControl: false,
+            //             gestureHandling: 'greedy',
+            //             panControl: true,
+            //             zoomControl: true,
+            //             rotateControl: false,
+            //             fullscreenControl: false
+            //         }}
+            //     >
+            //         <Polyline
+            //             path={this.state.pathCoordinates}
+            //             geodesic={true}
+            //             options={{
+            //                 strokeColor: "#ff2527",
+            //                 strokeOpacity: 0.8,
+            //                 strokeWeight: 4,
+            //             }}
+            //         />
+            //     </GoogleMap>
+            // ));
             return (
                 <div className="rideDetails">
-                    <Map
+                    {/* <Map
                         containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                         mapElement={ <div style={{ height: `100%` }} /> }
-                    />
-                    <div className="riderDetails__header wrapper">
-                        <div className="riderDetails__header--backArrow" onClick={this.props.history.goBack}>
+                    /> */}
+                    <div className="rideDetails__header wrapper">
+                        <div className="rideDetails__header--title" onClick={this.props.history.goBack}>
                             <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/>
+                            <h1 className="home__title">{group_name}</h1>
                         </div>
-                        <h1 className="home__title">{group_name}</h1>
                     </div>
                     <div className="groupDetails wrapper">
                         <Link to={`/bikeroutes/${_id}`}>
@@ -94,7 +107,7 @@ export default class GroupRide extends Component {
                             <p>{meetup_location}</p>
                         </div>
                         <div className="rideDetails__join">
-                            <button>Join Ride</button> 
+                            <button>{this.state.joined ? "Leave Group" : "Join Ride"}</button> 
                         </div>
                         <h2 className="home__title">{`Attending (${attending.length})`}</h2>    
                     </div>
