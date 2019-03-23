@@ -73,8 +73,10 @@ export default class GroupRide extends Component {
                         containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                         mapElement={ <div style={{ height: `100%` }} /> }
                     />
-                    <div className="cyclistList__header wrapper">
-                        <Link to='/groups'><img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/></Link>
+                    <div className="riderDetails__header wrapper">
+                        <div className="riderDetails__header--backArrow" onClick={this.props.history.goBack}>
+                            <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/>
+                        </div>
                         <h1 className="home__title">{group_name}</h1>
                     </div>
                     <div className="groupDetails wrapper">

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Spring } from 'react-spring/renderprops';
 import Cyclist from './Cyclist';
+import GroupSelect from './GroupSelect';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Profile extends Component {
@@ -65,7 +67,7 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="userDetails__bio">
                                     <div className="userDetails__bio--container">
-                                        <img src="/Assets/images/Icons/bio.png" alt=" icon"/>
+                                        <img src="/Assets/images/Icons/bio.png" alt="icon"/>
                                     </div>
                                     <p>{bio}</p>
                                 </div>
@@ -75,7 +77,18 @@ export default class Profile extends Component {
                                     </div>
                                     <p>{interests}</p>
                                 </div>
-                                <h1 className="home__title">Friends</h1>
+                            </div>
+                            <div className="upcomingList wrapper">
+                                <h1 className="home__title">{`My Upcoming Rides (${joined_groups.length})`}</h1>
+                                {joined_groups.map(group => {
+                                    return  <Link to={`/groups/${group._id}`} key={group._id}><GroupSelect title={group.group_name} 
+                                                                                                           riders={group.attending.length}
+                                                                                                           date={`${group.meetup_date} @ ${group.meetup_time}`}
+                                                                                                           route={group.bike_route.route_name}
+                                                                                                           id={group._id}
+                                                                                                           key={group._id} /></Link>
+                                })}        
+                                <h1 className="home__title">{`Friends (${friends.length})`}</h1>
                             </div>
                             <div className="friendsList wrapper">
                                 {friends.map(friend => {
@@ -85,16 +98,6 @@ export default class Profile extends Component {
                                                     id={friend._id}
                                                     key={friend._id}/>
                                 })}
-                            </div>
-                            <div className="upcomingList wrapper">
-                                <h1 className="home__title">Upcoming Rides</h1>
-                                {/* {friends.map(friend => {
-                                    return <Cyclist imageUrl={friend.profile_pic_list_url} 
-                                                    name={friend.first_name} 
-                                                    region={friend.region}
-                                                    id={friend._id}
-                                                    key={friend._id}/>
-                                })} */}
                             </div>
                         </div>
                         )

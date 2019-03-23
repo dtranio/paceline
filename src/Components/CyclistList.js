@@ -13,11 +13,11 @@ export default class CyclistList extends Component {
                 <div className="cyclers wrapper">
                     {this.props.cyclistList.map(cyclist => {
                         return <Cyclist 
-                            name={cyclist.first_name} 
-                            imageUrl={cyclist.profile_pic_list_url} 
-                            key={cyclist._id} 
-                            id={cyclist._id} 
-                            region={cyclist.region}/>;
+                                    name={cyclist.first_name} 
+                                    imageUrl={cyclist.profile_pic_list_url} 
+                                    key={cyclist._id} 
+                                    id={cyclist._id} 
+                                    region={cyclist.region}/>;
                     })}
                 </div>
             </div>

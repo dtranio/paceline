@@ -151,4 +151,85 @@
             }
         }
     }
+    .upcomingList {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        a {
+            margin: 0;
+            display: flex;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            border-radius: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+        }
+        .groupSelection {
+            height: 125px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid white;
+            border-radius: 10px;
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                background: rgba(black, 0.2);
+            }
+            img {
+                width: 37%;
+                height: 125px;
+                object-fit: cover;
+                overflow: hidden;
+                border-right: 1px solid white;
+            }
+            &__groupName {
+                margin: 0;
+                font-size: 1rem;
+                color: white;
+                position: absolute;
+                bottom: 10%;
+                right: 3%;
+            }
+            &__route {
+                font-size: 0.8rem;
+                margin: 0;
+                color: lightsalmon;
+                position: absolute;
+                z-index: 2;
+                top: 7%;
+                right: 3%;
+            }
+            &__riders {
+                font-size: 0.8rem;
+                margin: 0;
+                color: lightblue;
+                position: absolute;
+                z-index: 2;
+                top: 29%;
+                right: 3%;
+            }
+            &__date {
+                font-size: 0.8rem;
+                margin: 0;
+                color: lightpink;
+                position: absolute;
+                z-index: 2;
+                top: 51%;
+                right: 3%;
+            }
+        }
+    }
 }
