@@ -21,20 +21,20 @@ export default class BikeRoute extends Component {
     }
     render() {
         const {bike_type, center, distance, route_description, route_gallery_url, route_gallery_url2, route_name, route_pic_url} = this.state.routeDetails;
-        // const DirectionsService = new google.maps.DirectionsService();
-        // DirectionsService.route({   
-        //     origin: this.state.routeDetails.origin, 
-        //     destination: this.state.routeDetails.destination,  
-        //     travelMode: google.maps.TravelMode.BICYCLING,   
-        //     },  
-        //     (response, status) => {   
-        //         if (status === google.maps.DirectionsStatus.OK) {   
-        //             const coordinates = response.routes[0].overview_path;   
-        //             this.setState({
-        //                 pathCoordinates: coordinates,
-        //             });
-        //         }
-        // });
+        const DirectionsService = new google.maps.DirectionsService();
+        DirectionsService.route({   
+            origin: this.state.routeDetails.origin, 
+            destination: this.state.routeDetails.destination,  
+            travelMode: google.maps.TravelMode.BICYCLING,   
+            },  
+            (response, status) => {   
+                if (status === google.maps.DirectionsStatus.OK) {   
+                    const coordinates = response.routes[0].overview_path;   
+                    this.setState({
+                        pathCoordinates: coordinates,
+                    });
+                }
+        });
         const Map = withGoogleMap(() => (
             <GoogleMap
                 defaultCenter = { center }
@@ -50,7 +50,7 @@ export default class BikeRoute extends Component {
                     fullscreenControl: false
               }}
             >
-                {/* <Polyline
+                <Polyline
                     path={this.state.pathCoordinates}
                     geodesic={true}
                     options={{
@@ -58,7 +58,7 @@ export default class BikeRoute extends Component {
                         strokeOpacity: 0.8,
                         strokeWeight: 4,
                     }}
-                /> */}
+                />
             </GoogleMap>
         ));
         return (
