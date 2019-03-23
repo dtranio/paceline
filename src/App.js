@@ -16,37 +16,49 @@ import axios from 'axios';
 To Do
 --------------
 SATURDAY
+--------------------------
 [X] List of Upcoming Rides in Profile
     [] FIX - Populating attending and bike route 
-Done By 1PM
+Done By 1PM -------------
 
+--------------------------
 [X] Remove self from cyclist array
-[] Hide add friend/message button on own profile
-Done By 2PM
+[X] Hide add friend/message button on own profile
+[X] Hide my upcoming rides on other people's profile
+Done By 2PM -------------
 
+--------------------------
+[] Add friend/remove friend
+[] Join Ride/Leave Ride 
+Done By 6PM -------------
+
+--------------------------
 [] Form to Create a Group 
     [] How to Handle Date? 
-Done By 4PM
+Done by Saturday -------------
 
-[] Join Ride/Leave Ride 
 [] Sort Group List by Date
-[] Invite to Ride 
-Done By End of Sunday
+[] Invite to Ride AND/OR Group Ride Comments
+[] Delete Group
+    [] Need to add group leader to group collection
+Done By Sunday -------------
 
 
 TO FIX
 [] BikeRoutes.js map 
+[] Populating attending and bike route 
 [] Add meetup location description
 [] Add home icon to profile page
 
 
 STRETCH
-[] Group Ride Comments 
-
-
-[] Edit Profile
-[] Make private social groups and schedule rides
+[] Delete group
 [] Messaging 
+    [] in profile, need button to bring to list of convos
+[] Edit Profile
+[] Group Ride Comments 
+[] Make private social groups and schedule rides
+[] Users can draw their own routes
 
 */
 
@@ -108,7 +120,7 @@ class App extends Component {
                         <Route exact path="/" component={Login}/>
                         <Route exact path="/home" render={props => (<Home {...props} user={this.state.user} />)} />/>
                         <Route exact path="/cyclists" render={props => (<CyclistList {...props} cyclistList={this.state.cyclists}/>)} />
-                        <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} />)} />
+                        <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user}/>)} />
                         <Route exact path="/groups" render={props => (<GroupRides {...props} groupList={this.state.groupList} loggedInAs={this.state.loggedInAs} />)} />
                         <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />

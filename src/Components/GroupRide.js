@@ -25,7 +25,7 @@ export default class GroupRide extends Component {
     render() {
         if (this.state.loaded) {
             console.log(this.state.groupDetails)
-            const {group_name, description, expected_duration, meetup_date, meetup_time} = this.state.groupDetails;
+            const {group_name, description, expected_duration, meetup_date, meetup_time, meetup_location, attending} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
             const DirectionsService = new google.maps.DirectionsService();
             // DirectionsService.route({   
@@ -91,22 +91,22 @@ export default class GroupRide extends Component {
                             <h2>Date & Time</h2>
                             <p>{`${meetup_date} @ ${meetup_time}`}</p>
                             <h2>Meeting Spot</h2>
-                            <p>Davisville Station</p>
+                            <p>{meetup_location}</p>
                         </div>
                         <div className="rideDetails__join">
                             <button>Join Ride</button> 
                         </div>
-                        <h2 className="home__title">Attending</h2>    
+                        <h2 className="home__title">{`Attending (${attending.length})`}</h2>    
                     </div>
                     <div className="rideDetails__attending wrapper">
-                        {this.state.groupDetails.attending.map(attendee => {
-                                        return  <Cyclist 
-                                                    key={attendee._id}
-                                                    imageUrl={attendee.profile_pic_list_url}
-                                                    name={attendee.first_name}
-                                                    region={attendee.region} 
-                                                    id={attendee._id}
-                                                />
+                        {attending.map(attendee => {
+                            return  <Cyclist 
+                                        key={attendee._id}
+                                        imageUrl={attendee.profile_pic_list_url}
+                                        name={attendee.first_name}
+                                        region={attendee.region} 
+                                        id={attendee._id}
+                                    />
                                     
                         })}
                     </div>

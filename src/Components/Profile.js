@@ -9,7 +9,8 @@ export default class Profile extends Component {
     state = {
         cyclistInfo: {},
         currentUrl: "",
-        loaded: false
+        loaded: false,
+        friends: false
     }
     componentDidMount() {
         axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
@@ -19,6 +20,7 @@ export default class Profile extends Component {
                     currentUrl: this.props.match.params.cyclistId,
                     loaded: true
                 });
+                this.checkFriendship();
             });
     }
     componentDidUpdate() {
@@ -32,6 +34,29 @@ export default class Profile extends Component {
                     });
                     window.scroll(0,0);
                 });
+        }
+    }
+    checkFriendship() {
+        for (let i = 0; i < this.props.currentUser.friends.length; i++) {
+            if (this.props.match.params.cyclistId === this.props.currentUser.friends[i]._id) {
+                console.log("Friends!")
+                this.setState({
+                    friends: true
+                })
+            }
+        }
+    }
+    addRemove = () => {
+        if (this.state.friends) {
+            
+            this.setState({
+                friends: false
+            });
+        }
+        else {
+            this.setState({
+                friends: true
+            });
         }
     }
     render() {
@@ -55,8 +80,14 @@ export default class Profile extends Component {
                                 </div>
                             </div>
                             <div className="profile__button">
-                                <button className="profile__button--style profile__button--add">Add Friend</button>
-                                <button className="profile__button--style profile__button--message">Message</button>
+                                {this.props.loggedInAs !== this.props.match.params.cyclistId ? 
+                                <>
+                                    <button className="profile__button--style profile__button--add" onClick={this.addRemove}>{this.state.friends ? "Unfriend" : "Add Friend"}</button>
+                                    <button className="profile__button--style profile__button--message">Message</button>
+                                    </>
+                                : 
+                                    <button className="profile__button--style profile__button--message">Edit Profile</button>
+                                }
                             </div>
                             <div className="userDetails wrapper">
                                 <div className="userDetails__bikeOwned">
@@ -78,19 +109,21 @@ export default class Profile extends Component {
                                     <p>{interests}</p>
                                 </div>
                             </div>
-                            <div className="upcomingList wrapper">
-                                <h1 className="home__title">{`My Upcoming Rides (${joined_groups.length})`}</h1>
-                                {joined_groups.map(group => {
-                                    return  <Link to={`/groups/${group._id}`} key={group._id}><GroupSelect title={group.group_name} 
-                                                                                                           riders={group.attending.length}
-                                                                                                           date={`${group.meetup_date} @ ${group.meetup_time}`}
-                                                                                                           route={group.bike_route.route_name}
-                                                                                                           id={group._id}
-                                                                                                           key={group._id} /></Link>
-                                })}        
-                                <h1 className="home__title">{`Friends (${friends.length})`}</h1>
-                            </div>
+                            {this.props.loggedInAs === this.props.match.params.cyclistId ? 
+                                <div className="upcomingList wrapper">
+                                    <h1 className="home__title">{`My Upcoming Rides (${joined_groups.length})`}</h1>
+                                    {joined_groups.map(group => {
+                                        return  <Link to={`/groups/${group._id}`} key={group._id}><GroupSelect title={group.group_name} 
+                                                                                                            riders={group.attending.length}
+                                                                                                            date={`${group.meetup_date} @ ${group.meetup_time}`}
+                                                                                                            route={group.bike_route.route_name}
+                                                                                                            id={group._id}
+                                                                                                            key={group._id} /></Link>
+                                    })}        
+                                </div>
+                            : null}
                             <div className="friendsList wrapper">
+                                <h1 className="home__title">{`Friends (${friends.length})`}</h1>
                                 {friends.map(friend => {
                                     return <Cyclist imageUrl={friend.profile_pic_list_url} 
                                                     name={friend.first_name} 
