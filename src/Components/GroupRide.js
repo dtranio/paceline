@@ -34,6 +34,72 @@ export default class GroupRide extends Component {
                 break;
             }
         }
+    }    
+    joinLeave = () => {
+        if (this.state.joined) {
+            let groupStatus = {
+                groupAction: "leave",
+                user: this.props.loggedInAs
+            }
+            let config = {
+                method: "PUT",
+                url: `http://localhost:8080/groups/${this.props.match.params.groupId}`,
+                data: groupStatus,
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+            axios(config) 
+                .then(response => {
+                    console.log(response.data)
+                    axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
+                        .then(group => {
+                            this.setState({
+                                joined: false,
+                                groupDetails: group.data
+                            });
+                            this.checkJoined();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });   
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
+        else {
+            let groupStatus = {
+                groupAction: "join",
+                user: this.props.loggedInAs
+            }
+            let config = {
+                method: "PUT",
+                url: `http://localhost:8080/groups/${this.props.match.params.groupId}`,
+                data: groupStatus,
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+            axios(config) 
+                .then(response => {
+                    console.log(response.data)
+                    axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
+                        .then(group => {
+                            this.setState({
+                                joined: true,
+                                groupDetails: group.data
+                            });
+                            this.checkJoined();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });   
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
     }
     render() {
         if (this.state.loaded) {
@@ -107,7 +173,7 @@ export default class GroupRide extends Component {
                             <p>{meetup_location}</p>
                         </div>
                         <div className="rideDetails__join">
-                            <button>{this.state.joined ? "Leave Group" : "Join Ride"}</button> 
+                            <button onClick={this.joinLeave}>{this.state.joined ? "Leave Group" : "Join Ride"}</button> 
                         </div>
                         <h2 className="home__title">{`Attending (${attending.length})`}</h2>    
                     </div>

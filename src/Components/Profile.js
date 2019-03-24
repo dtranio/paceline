@@ -8,20 +8,30 @@ import axios from 'axios';
 export default class Profile extends Component {
     state = {
         cyclistInfo: {},
+        userInfo: {},
         currentUrl: "",
         loaded: false,
         friends: false
     }
     componentDidMount() {
+        console.log("Mounted")
         axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
             .then(cyclist => {
                 this.setState({
                     cyclistInfo: cyclist.data,
                     currentUrl: this.props.match.params.cyclistId,
-                    loaded: true,
-                    friends: false
+                    loaded: true
                 });
+            });
+        axios.get(`http://localhost:8080/cyclists/${this.props.loggedInAs}`)
+            .then(user => {
+                this.setState({
+                    userInfo: user.data
+                })
                 this.checkFriendship();
+            })
+            .catch(error => {
+                console.log(error);
             });
     }
     componentDidUpdate() {
@@ -39,13 +49,12 @@ export default class Profile extends Component {
         }
     }
     checkFriendship() {
-        for (let i = 0; i < this.props.currentUser.friends.length; i++) {
-            console.log(this.props.currentUser.friends[i]._id)
-            if (this.props.match.params.cyclistId === this.props.currentUser.friends[i]._id) {
+        for (let i = 0; i < this.state.userInfo.friends.length; i++) {
+            if (this.props.match.params.cyclistId === this.state.userInfo.friends[i]._id) {
                 console.log("Friends!")
                 this.setState({
                     friends: true
-                })
+                });
                 break;
             }
         }
@@ -67,14 +76,32 @@ export default class Profile extends Component {
             // PUT request
             axios(config) 
                 .then(response => {
-                    console.log(response.data)
+                    axios.get(`http://localhost:8080/cyclists/${this.props.loggedInAs}`)
+                        .then(cyclist => {
+                            this.setState({
+                                userInfo: cyclist.data
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                    axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
+                        .then(cyclist => {
+                            this.setState({
+                                cyclistInfo: cyclist.data
+                            });
+                            this.checkFriendship();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });     
                     this.setState({
                         friends: false
-                    });
+                    })
                 })
                 .catch(error => {
-                    console.log(error);
-            }); 
+                    console.log(error)
+                });
         }
         else {
             let friendship = {
@@ -92,10 +119,28 @@ export default class Profile extends Component {
             // PUT request
             axios(config) 
                 .then(response => {
-                    console.log(response.data)
+                    axios.get(`http://localhost:8080/cyclists/${this.props.loggedInAs}`)
+                        .then(cyclist => {
+                            this.setState({
+                                userInfo: cyclist.data
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                    axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
+                        .then(cyclist => {
+                            this.setState({
+                                cyclistInfo: cyclist.data
+                            });
+                            this.checkFriendship();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });        
                     this.setState({
                         friends: true
-                    });
+                    })
                 })
                 .catch(error => {
                     console.log(error);

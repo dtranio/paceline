@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GroupSelect from './GroupSelect';
+import Axios from 'axios';
 
 export default class GroupRides extends Component {
+    state = {
+        rideInfo: {}
+    }
+    componentDidMount() {
+        
+    }
     render() {
         return (
             <div className="groupList">

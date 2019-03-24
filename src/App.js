@@ -26,10 +26,10 @@ Done By 1PM -------------
 Done By 2PM -------------
 
 
-[] Remove friend
-[] Add friend
-[] Leave Ride 
-[] Join Ride
+[X] Remove/Add Friend
+[X] Leave Ride 
+[X] Join Ride
+    [] FIX - Number of Riders Count
 Done By 6PM -------------
 
 
@@ -39,8 +39,7 @@ Done by Saturday -------------
 
 
 [] Sort Group List by Date
-[] Invite to Ride 
-[] Group Ride Comments
+[] Invite to Ride OR [] Group Ride Comments
 [] Delete Group
     [] Need to add group leader to group collection
 Done By Sunday -------------
@@ -50,16 +49,14 @@ Done By Sunday -------------
 Done by Monday -------------
 
 TO FIX
-[] BikeRoutes.js map 
-[] Populating attending and bike route 
-[] Add meetup location description
+[] BikeRoutes.js map **
+[] Populating attending and bike route **
 [] Add home icon to profile page
 
 
 STRETCH
 [] Delete group
 [] Messaging 
-    [] in profile, need button to bring to list of convos
 [] Edit Profile
 [] Group Ride Comments 
 [] Make private social groups and schedule rides
