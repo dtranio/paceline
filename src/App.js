@@ -16,7 +16,7 @@ import axios from 'axios';
 SATURDAY
 --------------------------
 [X] List of Upcoming Rides in Profile
-    [] FIX - Populating attending and bike route 
+    [] FIX - Populating attending and bike route ****
 Done By 1PM -------------
 
 
@@ -34,11 +34,11 @@ Done By 6PM -------------
 
 
 [X] Form to Create a Group 
-    [] FIX - Handling Dates
+    [] Handling Dates
     [] Form Validation
 Done by Sunday 12pm -------------
 
-[] Invite to Ride 
+[X] Invite to Ride 
 Done By Sunday -------------
 
 [] Commenting

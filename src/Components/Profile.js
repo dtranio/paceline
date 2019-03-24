@@ -147,11 +147,14 @@ export default class Profile extends Component {
     }
     render() {
         const {age, first_name, bio, interests, profile_pic_url, region, bike_owned, friends, joined_groups} = this.state.cyclistInfo
-        console.log(this.state.cyclistInfo)
         if (this.state.loaded) {
             return (
                 <Spring from={{ marginTop: -400 }} to={{ marginTop: 0 }}>
                     { props => (
+                    <>
+                        <div className="homeButton" style={props}>
+                            <Link to='/home'><img src="/Assets/images/Icons/home.png" alt="home"/></Link>
+                        </div>
                         <div className="profile" style={props}>
                             <div className="profile__header profile--back wrapper">
                                 <div className="profile__header--backArrow" onClick={this.props.history.goBack}>
@@ -221,6 +224,7 @@ export default class Profile extends Component {
                                 })}
                             </div>
                         </div>
+                        </>
                         )
                     }
                 </Spring>

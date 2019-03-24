@@ -61,7 +61,6 @@ export default class GroupRide extends Component {
         for (let friend of this.props.currentUser.friends) {
             for (let attendingList of this.state.groupDetails.attending) {
                 if (attendingList._id === friend._id) {
-                    console.log(`${friend._id} is attending`);
                     attendingFriends.push(friend._id);
                 }
             }
