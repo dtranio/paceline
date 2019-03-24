@@ -47,6 +47,7 @@ Done By Sunday -------------
 [] Delete Group
     [] Need to add group leader to group collection
 [] Update profile, add routes
+[] Edit Profile
 Done by Monday -------------
 
 TO FIX
@@ -57,7 +58,6 @@ TO FIX
 STRETCH
 [] Delete group
 [] Messaging 
-[] Edit Profile
 [] Group Ride Comments 
 [] Make private social groups and schedule rides
 [] Users can draw their own routes

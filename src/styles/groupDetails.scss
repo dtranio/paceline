@@ -145,4 +145,28 @@
 .modalInvite {
     color: white;
     margin-top: 10px;
+    text-align: center;
+    &__friends {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    h2 {
+        text-align: left;
+    }
+    button {
+        margin-top: 20px;
+        margin-bottom: 50px;
+        width: 130px;
+        padding: 10px;
+        border-radius: 4px;
+        height: 35px;
+        background: steelblue;
+        border: 1px solid white;
+        box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+        color: white;
+        &:hover {
+            background: tomato;
+        }
+    }
 }

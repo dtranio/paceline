@@ -6,6 +6,7 @@ import Select from './Select';
 import Cyclist from './Cyclist';
 import axios from 'axios';
 import Modal from 'react-modal';
+import InviteCard from './InviteCard';
 
 export default class GroupRide extends Component {
     state = {
@@ -13,10 +14,11 @@ export default class GroupRide extends Component {
         groupDetails: {},
         loaded: false,
         joined: false,
-        modalIsOpen: false
+        modalIsOpen: false,
+        notAttending: [],
+        inviteList: []
     }
     componentDidMount() {
-        console.log(this.props.updateGroupList)
         axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
             .then(group => {
                 this.setState({
@@ -27,6 +29,7 @@ export default class GroupRide extends Component {
             });
     }
     openModal = () => {
+        this.checkFriends();
         this.setState({
             modalIsOpen: true
         });
@@ -36,10 +39,45 @@ export default class GroupRide extends Component {
             modalIsOpen: false
         });
     }
+    checkFriends = () => {
+        let attendingFriends = [];
+        for (let friend of this.props.currentUser.friends) {
+            for (let attendingList of this.state.groupDetails.attending) {
+                if (attendingList._id === friend._id) {
+                    console.log(`${friend._id} is attending`);
+                    attendingFriends.push(friend._id);
+                }
+            }
+        }
+        let notAttendingFriends = this.props.currentUser.friends.filter(friend => {
+                return !attendingFriends.includes(friend._id)
+            });
+        this.setState({
+            notAttending: notAttendingFriends
+        });
+    }
     inviteFriends = () => {
         this.setState({
             modalIsOpen: false
         });
+    }
+    highlight = () => {
+        let updatedList = this.state.inviteList;
+        if (this.state.selected) {
+            this.setState({
+                selected: false,
+                inviteList: updatedList
+            });
+            console.log(this.state.inviteList)
+        }
+        else {
+            updatedList.push(this.props.id)
+            this.setState({
+                selected: true,
+                inviteList: updatedList
+            });
+            console.log(this.state.inviteList)
+        }
     }
     checkJoined() {
         for (let i = 0; i < this.state.groupDetails.attending.length; i++) {
@@ -115,14 +153,9 @@ export default class GroupRide extends Component {
                 });
         }
     }
-    hello() {
-        console.log("hello")
-    }
     render() {
         if (this.state.loaded) {
             const {group_name, description, meetup_date, meetup_spot, attending} = this.state.groupDetails;
-            console.log(this.state.groupDetails)
-            console.log(this.props.currentUser)
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
             // const DirectionsService = new google.maps.DirectionsService();
             // DirectionsService.route({   
@@ -200,9 +233,14 @@ export default class GroupRide extends Component {
                                 <div className="modalInvite wrapper">
                                     <h2 onClick={this.hello}>Invite Friends</h2>
                                     <div className="modalInvite__friends">
-                                        
+                                    {this.state.notAttending.map(friend => {
+                                        return <InviteCard id={friend._id} 
+                                                           region={friend.region}
+                                                           name={friend.first_name}
+                                                           imgUrl={friend.profile_pic_list_url}/>
+                                    })}
                                     </div>
-                                    <button onClick={this.inviteFriends}>Hi There</button> 
+                                    <button onClick={this.inviteFriends}>Invite</button> 
                                 </div>
                             </Modal>
                         </div>
