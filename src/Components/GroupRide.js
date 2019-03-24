@@ -39,6 +39,23 @@ export default class GroupRide extends Component {
             modalIsOpen: false
         });
     }
+    handleInviteList = data => {
+        let userInviteList = this.state.inviteList;
+        if (data.selection === "remove") {
+            let hello = userInviteList.filter(item => {
+                return item !== data.id
+            });
+            this.setState({
+                inviteList: hello
+            });
+        }
+        else {
+            userInviteList.push(data.id);
+            this.setState({
+                inviteList: userInviteList
+            });
+        }
+    }
     checkFriends = () => {
         let attendingFriends = [];
         for (let friend of this.props.currentUser.friends) {
@@ -57,27 +74,31 @@ export default class GroupRide extends Component {
         });
     }
     inviteFriends = () => {
+        console.log(this.state.inviteList)
+        let config = {
+            method: "PUT",
+            url: `http://localhost:8080/groups/${this.props.match.params.groupId}/invite`,
+            data: this.state.inviteList,
+            headers: {
+                "content-type": "application/json"
+            }
+        }
+        axios(config)
+            .then(response => {
+                axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
+                    .then(group => {
+                        this.setState({
+                            groupDetails: group.data,
+                        });
+                        this.checkJoined()
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+            })
         this.setState({
             modalIsOpen: false
         });
-    }
-    highlight = () => {
-        let updatedList = this.state.inviteList;
-        if (this.state.selected) {
-            this.setState({
-                selected: false,
-                inviteList: updatedList
-            });
-            console.log(this.state.inviteList)
-        }
-        else {
-            updatedList.push(this.props.id)
-            this.setState({
-                selected: true,
-                inviteList: updatedList
-            });
-            console.log(this.state.inviteList)
-        }
     }
     checkJoined() {
         for (let i = 0; i < this.state.groupDetails.attending.length; i++) {
@@ -157,52 +178,52 @@ export default class GroupRide extends Component {
         if (this.state.loaded) {
             const {group_name, description, meetup_date, meetup_spot, attending} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
-            // const DirectionsService = new google.maps.DirectionsService();
-            // DirectionsService.route({   
-            //     origin: this.state.groupDetails.bike_route.origin, 
-            //     destination: this.state.groupDetails.bike_route.destination,   
-            //     travelMode: google.maps.TravelMode.BICYCLING,   
-            //     },  
-            //     (response, status) => {   
-            //         if (status === google.maps.DirectionsStatus.OK) {   
-            //             const coordinates = response.routes[0].overview_path;   
-            //             this.setState({   
-            //                 pathCoordinates: coordinates,
-            //             });
-            //         }
-            // });
-            // const Map = withGoogleMap(props => (
-            //     <GoogleMap
-            //         defaultCenter = { center }
-            //         defaultZoom = { 13 }
-            //         defaultOptions={{
-            //             scaleControl: false,
-            //             mapTypeControl: false,
-            //             streetViewControl: false,
-            //             gestureHandling: 'greedy',
-            //             panControl: true,
-            //             zoomControl: true,
-            //             rotateControl: false,
-            //             fullscreenControl: false
-            //         }}
-            //     >
-            //         <Polyline
-            //             path={this.state.pathCoordinates}
-            //             geodesic={true}
-            //             options={{
-            //                 strokeColor: "#ff2527",
-            //                 strokeOpacity: 0.8,
-            //                 strokeWeight: 4,
-            //             }}
-            //         />
-            //     </GoogleMap>
-            // ));
+            const DirectionsService = new google.maps.DirectionsService();
+            DirectionsService.route({   
+                origin: this.state.groupDetails.bike_route.origin, 
+                destination: this.state.groupDetails.bike_route.destination,   
+                travelMode: google.maps.TravelMode.BICYCLING,   
+                },  
+                (response, status) => {   
+                    if (status === google.maps.DirectionsStatus.OK) {   
+                        const coordinates = response.routes[0].overview_path;   
+                        this.setState({   
+                            pathCoordinates: coordinates,
+                        });
+                    }
+            });
+            const Map = withGoogleMap(props => (
+                <GoogleMap
+                    defaultCenter = { center }
+                    defaultZoom = { 13 }
+                    defaultOptions={{
+                        scaleControl: false,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                        gestureHandling: 'greedy',
+                        panControl: true,
+                        zoomControl: true,
+                        rotateControl: false,
+                        fullscreenControl: false
+                    }}
+                >
+                    <Polyline
+                        path={this.state.pathCoordinates}
+                        geodesic={true}
+                        options={{
+                            strokeColor: "#ff2527",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 4,
+                        }}
+                    />
+                </GoogleMap>
+            ));
             return (
                 <div className="rideDetails">
-                    {/* <Map
+                    <Map
                         containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                         mapElement={ <div style={{ height: `100%` }} /> }
-                    /> */}
+                    />
                     <div className="rideDetails__header wrapper">
                         <div className="rideDetails__header--title" onClick={this.props.history.goBack}>
                             <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/>
@@ -235,9 +256,11 @@ export default class GroupRide extends Component {
                                     <div className="modalInvite__friends">
                                     {this.state.notAttending.map(friend => {
                                         return <InviteCard id={friend._id} 
+                                                           key={friend._id} 
                                                            region={friend.region}
                                                            name={friend.first_name}
-                                                           imgUrl={friend.profile_pic_list_url}/>
+                                                           imgUrl={friend.profile_pic_list_url}
+                                                           handleInviteList={this.handleInviteList}/>
                                     })}
                                     </div>
                                     <button onClick={this.inviteFriends}>Invite</button> 
