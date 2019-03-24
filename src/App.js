@@ -29,17 +29,17 @@ Done By 2PM -------------
 [X] Remove/Add Friend
 [X] Leave Ride 
 [X] Join Ride
-    [] FIX - Number of Riders Count
+    [X] FIX - Number of Riders Count
 Done By 6PM -------------
 
 
 [] Form to Create a Group 
-    [] How to Handle Date? 
-Done by Saturday -------------
-
-
+[] Sign Out Button
+[] Add home icon to profile page
 [] Sort Group List by Date
-[] Invite to Ride OR [] Group Ride Comments
+Done by Sunday Afternoon -------------
+
+[] Invite to Ride 
 [] Delete Group
     [] Need to add group leader to group collection
 Done By Sunday -------------
@@ -51,7 +51,6 @@ Done by Monday -------------
 TO FIX
 [] BikeRoutes.js map **
 [] Populating attending and bike route **
-[] Add home icon to profile page
 
 
 STRETCH
@@ -69,7 +68,6 @@ class App extends Component {
         cyclists: [],
         loggedInAs: "5c92d64d7214992360212833",
         user: {},
-        groupList: [],
         bikeRoutes: []
     }
     componentDidMount() {
@@ -88,15 +86,6 @@ class App extends Component {
                     user: foundUser,
                     cyclists: filteredUsers
                 })
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        axios.get('http://localhost:8080/groups')
-            .then(groupList => {
-                this.setState({
-                    groupList: groupList.data
-                });
             })
             .catch(error => {
                 console.log(error);
@@ -123,7 +112,7 @@ class App extends Component {
                         <Route exact path="/home" render={props => (<Home {...props} user={this.state.user} />)} />/>
                         <Route exact path="/cyclists" render={props => (<CyclistList {...props} cyclistList={this.state.cyclists}/>)} />
                         <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user}/>)} />
-                        <Route exact path="/groups" render={props => (<GroupRides {...props} groupList={this.state.groupList} loggedInAs={this.state.loggedInAs} />)} />
+                        <Route exact path="/groups" render={props => (<GroupRides {...props} />)} />
                         <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />

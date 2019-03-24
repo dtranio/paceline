@@ -14,7 +14,6 @@ export default class Profile extends Component {
         friends: false
     }
     componentDidMount() {
-        console.log("Mounted")
         axios.get(`http://localhost:8080/cyclists/${this.props.match.params.cyclistId}`)
             .then(cyclist => {
                 this.setState({
@@ -51,7 +50,6 @@ export default class Profile extends Component {
     checkFriendship() {
         for (let i = 0; i < this.state.userInfo.friends.length; i++) {
             if (this.props.match.params.cyclistId === this.state.userInfo.friends[i]._id) {
-                console.log("Friends!")
                 this.setState({
                     friends: true
                 });

@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, Polyline} from 'react-google-maps';
-import { Link } from 'react-router-dom';
 import Select from './Select';
 import axios from 'axios';
   
@@ -68,8 +67,8 @@ export default class BikeRoute extends Component {
                     mapElement={ <div style={{ height: `100%` }} /> }
                 />
                 <div className="routeContainer wrapper">
-                    <div className="cyclistList__header">
-                        <Link to='/bikeroutes'><img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/></Link>
+                    <div className="routeContainer__header">
+                        <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow" onClick={this.props.history.goBack}/>
                         <h1 className="home__title">{route_name}</h1>
                     </div>
                     <div className="routeDetails">

@@ -103,55 +103,54 @@ export default class GroupRide extends Component {
     }
     render() {
         if (this.state.loaded) {
-            console.log(this.state.groupDetails)
             const {group_name, description, expected_duration, meetup_date, meetup_time, meetup_location, attending} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
-            // const DirectionsService = new google.maps.DirectionsService();
-            // DirectionsService.route({   
-            //     origin: this.state.groupDetails.bike_route.origin, 
-            //     destination: this.state.groupDetails.bike_route.destination,   
-            //     travelMode: google.maps.TravelMode.BICYCLING,   
-            //     },  
-            //     (response, status) => {   
-            //         if (status === google.maps.DirectionsStatus.OK) {   
-            //             const coordinates = response.routes[0].overview_path;   
-            //             this.setState({   
-            //                 pathCoordinates: coordinates,
-            //             });
-            //         }
-            // });
-            // const Map = withGoogleMap(props => (
-            //     <GoogleMap
-            //         defaultCenter = { center }
-            //         defaultZoom = { 13 }
-            //         defaultOptions={{
-            //             scaleControl: false,
-            //             mapTypeControl: false,
-            //             streetViewControl: false,
-            //             gestureHandling: 'greedy',
-            //             panControl: true,
-            //             zoomControl: true,
-            //             rotateControl: false,
-            //             fullscreenControl: false
-            //         }}
-            //     >
-            //         <Polyline
-            //             path={this.state.pathCoordinates}
-            //             geodesic={true}
-            //             options={{
-            //                 strokeColor: "#ff2527",
-            //                 strokeOpacity: 0.8,
-            //                 strokeWeight: 4,
-            //             }}
-            //         />
-            //     </GoogleMap>
-            // ));
+            const DirectionsService = new google.maps.DirectionsService();
+            DirectionsService.route({   
+                origin: this.state.groupDetails.bike_route.origin, 
+                destination: this.state.groupDetails.bike_route.destination,   
+                travelMode: google.maps.TravelMode.BICYCLING,   
+                },  
+                (response, status) => {   
+                    if (status === google.maps.DirectionsStatus.OK) {   
+                        const coordinates = response.routes[0].overview_path;   
+                        this.setState({   
+                            pathCoordinates: coordinates,
+                        });
+                    }
+            });
+            const Map = withGoogleMap(props => (
+                <GoogleMap
+                    defaultCenter = { center }
+                    defaultZoom = { 13 }
+                    defaultOptions={{
+                        scaleControl: false,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                        gestureHandling: 'greedy',
+                        panControl: true,
+                        zoomControl: true,
+                        rotateControl: false,
+                        fullscreenControl: false
+                    }}
+                >
+                    <Polyline
+                        path={this.state.pathCoordinates}
+                        geodesic={true}
+                        options={{
+                            strokeColor: "#ff2527",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 4,
+                        }}
+                    />
+                </GoogleMap>
+            ));
             return (
                 <div className="rideDetails">
-                    {/* <Map
+                    <Map
                         containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                         mapElement={ <div style={{ height: `100%` }} /> }
-                    /> */}
+                    />
                     <div className="rideDetails__header wrapper">
                         <div className="rideDetails__header--title" onClick={this.props.history.goBack}>
                             <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/>

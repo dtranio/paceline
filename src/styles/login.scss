@@ -46,12 +46,11 @@
                 font-size: 0.9rem;
             }
         }
-        &__submit {
+        &--login {
             font-family: $font;
-            text-decoration: none;
-            background: steelblue;
-            color: white;
             border: none;
+            color: white;
+            background: steelblue;
             margin-top: 15px;
             margin-bottom: 5px;
             height: 35px;
@@ -60,7 +59,7 @@
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
             width: 55%;
         }
-        button {
+        &--register {
             font-family: $font;
             border: none;
             color: white;
@@ -71,6 +70,10 @@
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
             border-radius: 4px;
             width: 55%;
+        }
+        a {
+            width: 100%;
+            text-align: center;
         }
     }
 }

@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GroupSelect from './GroupSelect';
-import Axios from 'axios';
+import axios from 'axios';
 
 export default class GroupRides extends Component {
     state = {
-        rideInfo: {}
+        groupList: []
     }
     componentDidMount() {
-        
+        axios.get('http://localhost:8080/groups')
+            .then(groupList => {
+                this.setState({
+                    groupList: groupList.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
     render() {
         return (
@@ -18,7 +26,7 @@ export default class GroupRides extends Component {
                     <h1 className="home__title">Upcoming Group Rides</h1> 
                 </div>
                 <div className="groupContainer wrapper">
-                    {this.props.groupList.map(group => {
+                    {this.state.groupList.map(group => {
                                     return  <Link to={`/groups/${group._id}`} key={group._id}>
                                                 <GroupSelect 
                                                     title={group.group_name} 
