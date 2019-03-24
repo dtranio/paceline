@@ -34,10 +34,12 @@ Done By 6PM -------------
 
 
 [] Form to Create a Group 
+    [] Date?
+    [] Form Validation
 [] Sign Out Button
 [] Add home icon to profile page
 [] Sort Group List by Date
-Done by Sunday Afternoon -------------
+Done by Sunday 12pm -------------
 
 [] Invite to Ride 
 [] Delete Group
@@ -99,8 +101,6 @@ class App extends Component {
             .catch(error => {
                 console.log(error);
             });
-    }
-    retrieveFormData() {
 
     }
     render() {
@@ -112,11 +112,11 @@ class App extends Component {
                         <Route exact path="/home" render={props => (<Home {...props} user={this.state.user} />)} />/>
                         <Route exact path="/cyclists" render={props => (<CyclistList {...props} cyclistList={this.state.cyclists}/>)} />
                         <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user}/>)} />
-                        <Route exact path="/groups" render={props => (<GroupRides {...props} />)} />
+                        <Route exact path="/groups" render={props => (<GroupRides {...props} groupList={this.state.groupList} />)} />
                         <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />
-                        <Route exact path="/creategroup" render={props => (<GroupForm {...props} retrieveFormData={this.retrieveFormData} />)} />
+                        <Route exact path="/creategroup" render={props => (<GroupForm {...props} loggedInAs={this.state.loggedInAs} />)} />
                     </Switch>
                 </div>
             </Router>

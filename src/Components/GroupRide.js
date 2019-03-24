@@ -14,20 +14,19 @@ export default class GroupRide extends Component {
         joined: false
     }
     componentDidMount() {
+        console.log(this.props.updateGroupList)
         axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
             .then(group => {
                 this.setState({
                     groupDetails: group.data,
                     loaded: true
                 });
-                console.log(this.state.groupDetails);
                 this.checkJoined()
             });
     }
     checkJoined() {
         for (let i = 0; i < this.state.groupDetails.attending.length; i++) {
             if (this.props.loggedInAs === this.state.groupDetails.attending[i]._id) {
-                console.log("Currently Joined")
                 this.setState({
                     joined: true
                 })
@@ -51,7 +50,6 @@ export default class GroupRide extends Component {
             }
             axios(config) 
                 .then(response => {
-                    console.log(response.data)
                     axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
                         .then(group => {
                             this.setState({
@@ -62,7 +60,7 @@ export default class GroupRide extends Component {
                         })
                         .catch(error => {
                             console.log(error);
-                        });   
+                        });
                 })
                 .catch(error => {
                     console.log(error)
@@ -94,7 +92,8 @@ export default class GroupRide extends Component {
                         })
                         .catch(error => {
                             console.log(error);
-                        });   
+                        });
+                    this.props.updateGroupList();
                 })
                 .catch(error => {
                     console.log(error)
@@ -164,8 +163,6 @@ export default class GroupRide extends Component {
                         <div className="groupDetails__description">
                             <h2>Description</h2>
                             <p>{description}</p>
-                            <h2>Length</h2>
-                            <p>{expected_duration}</p>
                             <h2>Date & Time</h2>
                             <p>{`${meetup_date} @ ${meetup_time}`}</p>
                             <h2>Meeting Spot</h2>

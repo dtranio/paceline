@@ -1,6 +1,7 @@
 .formContainer {
     background: $background;
     height: 100vh;
+    padding-bottom: 150px;
     &__image {
         height: 150px;
         position: relative;
@@ -31,6 +32,7 @@
         }
         textarea {
             font-family: $font;
+            border-radius: 2px;
             padding: 10px;
             height: 75px;
         }
@@ -40,6 +42,7 @@
         }
         input {
             font-family: $font;
+            border-radius: 2px;
             padding-left: 10px;
         }
         &__groupName {
@@ -48,8 +51,37 @@
                 border: none;
             }
         }
+        &__groupMeetupSpot {
+            input {
+                height: 25px;
+                border: none;
+            }
+        }
+        &__routeSelect {
+            select {
+                background: lightgray;
+            }
+        }
+        &__groupDateTime {
+            width: 100%;
+            .react-datepicker-wrapper {
+                width: 100%;
+            }
+            .react-datepicker__input-container {
+                width: 100%;
+            }
+            input {
+                width: 97%;
+                height: 25px;
+                border: none;
+            }
+        }
         &__submit {
             align-items: center;
+            h2 {
+                margin-top: 0;
+                color: white
+            }
             &--button {
                 text-align: center;
                 text-decoration: none;

@@ -31,7 +31,7 @@ export default class GroupRides extends Component {
                                                 <GroupSelect 
                                                     title={group.group_name} 
                                                     riders={group.attending.length}
-                                                    date={`${group.meetup_date} @ ${group.meetup_time}`}
+                                                    date={group.meetup_date}
                                                     route={group.bike_route.route_name}
                                                     id={group._id} />
                                             </Link>;
