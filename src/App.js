@@ -33,21 +33,20 @@ Done By 2PM -------------
 Done By 6PM -------------
 
 
-[] Form to Create a Group 
-    [] Date?
+[X] Form to Create a Group 
+    [] FIX - Handling Dates
     [] Form Validation
-[] Sign Out Button
-[] Add home icon to profile page
-[] Sort Group List by Date
 Done by Sunday 12pm -------------
 
 [] Invite to Ride 
-[] Delete Group
-    [] Need to add group leader to group collection
 Done By Sunday -------------
 
-
 [] Commenting
+[] Sign Out Button
+[] Add home icon to profile page
+[] Delete Group
+    [] Need to add group leader to group collection
+[] Update profile, add routes
 Done by Monday -------------
 
 TO FIX

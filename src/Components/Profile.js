@@ -147,6 +147,7 @@ export default class Profile extends Component {
     }
     render() {
         const {age, first_name, bio, interests, profile_pic_url, region, bike_owned, friends, joined_groups} = this.state.cyclistInfo
+        console.log(this.state.cyclistInfo)
         if (this.state.loaded) {
             return (
                 <Spring from={{ marginTop: -400 }} to={{ marginTop: 0 }}>
@@ -201,7 +202,7 @@ export default class Profile extends Component {
                                     {joined_groups.map(group => {
                                         return  <Link to={`/groups/${group._id}`} key={group._id}><GroupSelect title={group.group_name} 
                                                                                                             riders={group.attending.length}
-                                                                                                            date={`${group.meetup_date} @ ${group.meetup_time}`}
+                                                                                                            date={group.meetup_date}
                                                                                                             route={group.bike_route.route_name}
                                                                                                             id={group._id}
                                                                                                             key={group._id} /></Link>
@@ -210,12 +211,13 @@ export default class Profile extends Component {
                             : null}
                             <div className="friendsList wrapper">
                                 <h1 className="home__title">{`Friends (${friends.length})`}</h1>
-                                {friends.map(friend => {
-                                    return <Cyclist imageUrl={friend.profile_pic_list_url} 
-                                                    name={friend.first_name} 
-                                                    region={friend.region}
-                                                    id={friend._id}
-                                                    key={friend._id}/>
+                                {friends.map(cyclist => {
+                                    return  <Cyclist 
+                                                name={cyclist.first_name} 
+                                                imageUrl={cyclist.profile_pic_list_url} 
+                                                key={cyclist._id} 
+                                                id={cyclist._id} 
+                                                region={cyclist.region}/>
                                 })}
                             </div>
                         </div>
