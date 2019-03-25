@@ -6,6 +6,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home">
+                <Link to='/'><img src="/Assets/images/icons/exit.png" alt="logout" className="home__logout"/></Link>
                 <div className="userSelectRow wrapper">
                     <h1 className="home__title ">{`Welcome, ${this.props.user.first_name}`}</h1>
                     <Link to='/cyclists'>

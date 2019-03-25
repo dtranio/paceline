@@ -114,10 +114,20 @@
     }
 }
 
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+
 .Modal {
+    animation: fade 0.7s;
     z-index: 5000;
     position: absolute;
-    width: 93%;
+    width: 92%;
     border: 2px solid steelblue;
     border-radius: 5px;
     top: 50%;

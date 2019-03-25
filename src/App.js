@@ -38,12 +38,12 @@ Done By 6PM -------------
     [] Form Validation
 Done by Sunday 12pm -------------
 
-[X] Invite to Ride 
+[X] Invite to Ride  
 Done By Sunday -------------
 
 [] Commenting
-[] Sign Out Button
-[] Add home icon to profile page
+[X] Sign Out Button on Home Page
+[] Transition Modal
 [] Delete Group
     [] Need to add group leader to group collection
 [] Update profile, add routes

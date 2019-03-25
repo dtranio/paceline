@@ -8,6 +8,8 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import InviteCard from './InviteCard';
 
+import { Spring } from 'react-spring/renderprops';
+
 export default class GroupRide extends Component {
     state = {
         pathCoordinates: [],
@@ -73,7 +75,6 @@ export default class GroupRide extends Component {
         });
     }
     inviteFriends = () => {
-        console.log(this.state.inviteList)
         let config = {
             method: "PUT",
             url: `http://localhost:8080/groups/${this.props.match.params.groupId}/invite`,
@@ -86,6 +87,7 @@ export default class GroupRide extends Component {
             .then(response => {
                 axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
                     .then(group => {
+                        console.log(group.data);
                         this.setState({
                             groupDetails: group.data,
                         });

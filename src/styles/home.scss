@@ -11,6 +11,7 @@
 .home {
     background: $background;
     height: 100vh;
+    position: relative;
     &__title {
         margin: 0;
         margin-bottom: 25px;
@@ -19,6 +20,12 @@
         font-family: $font;
         font-size: 1.5rem;
         text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.6);
+    }
+    &__logout {
+        width: 8%;
+        position: absolute;
+        top: 3.5%;
+        right: 6%;
     }
     .userSelectRow {
         .selection {

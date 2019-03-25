@@ -1,16 +1,3 @@
-.homeButton {
-    position: absolute;
-    z-index: 60;
-    top: 3%;
-    right: 4%;
-    background: none;
-    height: 10%;
-    width: 10%;
-    img {
-        width: 90%;
-    }
-}
-
 .profile {
     @include headerSetup();
     position: relative;

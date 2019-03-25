@@ -42,10 +42,9 @@ export default class Profile extends Component {
                         currentUrl: this.props.match.params.cyclistId,
                         loaded: true
                     });
-                    this.checkFriendship();
                     window.scroll(0,0);
                 });
-        }
+            }
     }
     checkFriendship() {
         for (let i = 0; i < this.state.userInfo.friends.length; i++) {
@@ -75,9 +74,9 @@ export default class Profile extends Component {
             axios(config) 
                 .then(response => {
                     axios.get(`http://localhost:8080/cyclists/${this.props.loggedInAs}`)
-                        .then(cyclist => {
+                        .then(user => {
                             this.setState({
-                                userInfo: cyclist.data
+                                userInfo: user.data
                             });
                         })
                         .catch(error => {
@@ -88,7 +87,6 @@ export default class Profile extends Component {
                             this.setState({
                                 cyclistInfo: cyclist.data
                             });
-                            this.checkFriendship();
                         })
                         .catch(error => {
                             console.log(error);
@@ -131,7 +129,6 @@ export default class Profile extends Component {
                             this.setState({
                                 cyclistInfo: cyclist.data
                             });
-                            this.checkFriendship();
                         })
                         .catch(error => {
                             console.log(error);
@@ -139,6 +136,7 @@ export default class Profile extends Component {
                     this.setState({
                         friends: true
                     })
+                    this.checkFriendship();
                 })
                 .catch(error => {
                     console.log(error);
@@ -151,10 +149,6 @@ export default class Profile extends Component {
             return (
                 <Spring from={{ marginTop: -400 }} to={{ marginTop: 0 }}>
                     { props => (
-                    <>
-                        <div className="homeButton" style={props}>
-                            <Link to='/home'><img src="/Assets/images/Icons/home.png" alt="home"/></Link>
-                        </div>
                         <div className="profile" style={props}>
                             <div className="profile__header profile--back wrapper">
                                 <div className="profile__header--backArrow" onClick={this.props.history.goBack}>
@@ -224,7 +218,6 @@ export default class Profile extends Component {
                                 })}
                             </div>
                         </div>
-                        </>
                         )
                     }
                 </Spring>
