@@ -8,21 +8,12 @@ import "react-datepicker/dist/react-datepicker.css";
 export default class GroupForm extends Component {
     constructor(){
         super();
-        this.state = {
-            formSubmitted: false,
-        }
         this.groupForm = React.createRef();
-    }
-    componentDidMount() {
-        this.setState({
-            formSubmitted: false
-        });
     }
     handleChange = date => {
         this.setState({
             startDate: date
         });
-        console.log(this.state.startDate)
     }
     submitHandler = e => {
         e.preventDefault();
@@ -48,13 +39,12 @@ export default class GroupForm extends Component {
         }
         axios(config) 
             .then(response => {
-                console.log(response.data)
+                form.reset();
+                window.location = `/groups/${response.data._id}`;
             })
             .catch(error => {
                 console.log(error)
             });
-        form.groupMeetupDate__input.value = "";
-        form.reset();
     }
     render() {
         return (
@@ -94,17 +84,16 @@ export default class GroupForm extends Component {
                                     <label>Select Date & Time</label>
                                         <DatePicker
                                             name="groupMeetupDate__input"
-                                            selected={ this.state.startDate }
-                                            onChange={ this.handleChange }
+                                            selected={this.state.startDate}
+                                            onChange={this.handleChange}
                                             minDate={new Date()}
                                             showTimeSelect
-                                            timeFormat="HH:mm"
+                                            timeFormat="hh:mm a"
                                             timeIntervals={30}
-                                            dateFormat="MMM d YYYY @ h:mm aa"
+                                            dateFormat="MMM d YYYY @ hh:mm aa"
                                             />
                                 </div>
                                 <div className="groupForm__submit">
-                                    <h2>{this.state.formSubmitted ? "Group Created" : null}</h2> 
                                     <input type="submit" className="groupForm__submit--button" value="Submit Group"/>
                                 </div>
                             </form>

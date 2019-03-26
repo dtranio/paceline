@@ -170,7 +170,7 @@ export default class Profile extends Component {
                                     <button className="profile__button--style profile__button--message">Message</button>
                                     </>
                                 : 
-                                    <button className="profile__button--style profile__button--message">Edit Profile</button>
+                                    <Link to='/editprofile'><button className="profile__button--style profile__button--message">Edit Profile</button></Link>
                                 }
                             </div>
                             <div className="userDetails wrapper">

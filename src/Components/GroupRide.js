@@ -8,8 +8,6 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import InviteCard from './InviteCard';
 
-import { Spring } from 'react-spring/renderprops';
-
 export default class GroupRide extends Component {
     state = {
         pathCoordinates: [],
@@ -18,7 +16,8 @@ export default class GroupRide extends Component {
         joined: false,
         modalIsOpen: false,
         notAttending: [],
-        inviteList: []
+        inviteList: [],
+        isGroupLeader: false
     }
     componentDidMount() {
         axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
@@ -28,6 +27,19 @@ export default class GroupRide extends Component {
                     loaded: true
                 });
                 this.checkJoined()
+                console.log(this.state.groupDetails)
+                if (this.props.loggedInAs === this.state.groupDetails.created_by._id) {
+                    console.log("you da leader")
+                    this.setState({
+                        isGroupLeader: true
+                    })
+                }
+                else {
+                    console.log("you not da leader")
+                    this.setState({
+                        isGroupLeader: false
+                    })
+                }
             });
     }
     openModal = () => {
@@ -87,9 +99,9 @@ export default class GroupRide extends Component {
             .then(response => {
                 axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
                     .then(group => {
-                        console.log(group.data);
                         this.setState({
                             groupDetails: group.data,
+                            inviteList: []
                         });
                         this.checkJoined()
                     });
@@ -175,56 +187,73 @@ export default class GroupRide extends Component {
                 });
         }
     }
+    deleteGroup = () => {
+        let config = {
+            method: "DELETE",
+            url: `http://localhost:8080/groups/${this.props.match.params.groupId}/delete`,
+            data: this.state.groupDetails.attending,
+            headers: {
+                "content-type": "application/json"
+            }
+        }
+        axios(config)
+            .then(response => {
+                window.location = `/groups`;
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
     render() {
         if (this.state.loaded) {
             const {group_name, description, meetup_date, meetup_spot, attending} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
-            const DirectionsService = new google.maps.DirectionsService();
-            DirectionsService.route({   
-                origin: this.state.groupDetails.bike_route.origin, 
-                destination: this.state.groupDetails.bike_route.destination,   
-                travelMode: google.maps.TravelMode.BICYCLING,   
-                },  
-                (response, status) => {   
-                    if (status === google.maps.DirectionsStatus.OK) {   
-                        const coordinates = response.routes[0].overview_path;   
-                        this.setState({   
-                            pathCoordinates: coordinates,
-                        });
-                    }
-            });
-            const Map = withGoogleMap(props => (
-                <GoogleMap
-                    defaultCenter = { center }
-                    defaultZoom = { 13 }
-                    defaultOptions={{
-                        scaleControl: false,
-                        mapTypeControl: false,
-                        streetViewControl: false,
-                        gestureHandling: 'greedy',
-                        panControl: true,
-                        zoomControl: true,
-                        rotateControl: false,
-                        fullscreenControl: false
-                    }}
-                >
-                    <Polyline
-                        path={this.state.pathCoordinates}
-                        geodesic={true}
-                        options={{
-                            strokeColor: "#ff2527",
-                            strokeOpacity: 0.8,
-                            strokeWeight: 4,
-                        }}
-                    />
-                </GoogleMap>
-            ));
+            // const DirectionsService = new google.maps.DirectionsService();
+            // DirectionsService.route({   
+            //     origin: this.state.groupDetails.bike_route.origin, 
+            //     destination: this.state.groupDetails.bike_route.destination,   
+            //     travelMode: google.maps.TravelMode.BICYCLING,   
+            //     },  
+            //     (response, status) => {   
+            //         if (status === google.maps.DirectionsStatus.OK) {   
+            //             const coordinates = response.routes[0].overview_path;   
+            //             this.setState({   
+            //                 pathCoordinates: coordinates,
+            //             });
+            //         }
+            // });
+            // const Map = withGoogleMap(props => (
+            //     <GoogleMap
+            //         defaultCenter = { center }
+            //         defaultZoom = { 13 }
+            //         defaultOptions={{
+            //             scaleControl: false,
+            //             mapTypeControl: false,
+            //             streetViewControl: false,
+            //             gestureHandling: 'greedy',
+            //             panControl: true,
+            //             zoomControl: true,
+            //             rotateControl: false,
+            //             fullscreenControl: false
+            //         }}
+            //     >
+            //         <Polyline
+            //             path={this.state.pathCoordinates}
+            //             geodesic={true}
+            //             options={{
+            //                 strokeColor: "#ff2527",
+            //                 strokeOpacity: 0.8,
+            //                 strokeWeight: 4,
+            //             }}
+            //         />
+            //     </GoogleMap>
+            // ));
             return (
                 <div className="rideDetails">
-                    <Map
+                    {/* <Map
                         containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                         mapElement={ <div style={{ height: `100%` }} /> }
-                    />
+                    /> */}
                     <div className="rideDetails__header wrapper">
                         <div className="rideDetails__header--title" onClick={this.props.history.goBack}>
                             <img src="/Assets/images/Icons/back-arrow.png" alt="back arrow"/>
@@ -280,6 +309,11 @@ export default class GroupRide extends Component {
                                         region={cyclist.region}/>;
                         })}
                     </div>
+                    {this.state.isGroupLeader ? 
+                        <div className="rideDetails__delete wrapper">
+                            <button onClick={this.deleteGroup}>Delete Group</button>
+                        </div>
+                    : null}
                 </div>
             )
         }

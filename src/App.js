@@ -9,6 +9,7 @@ import BikeRoutes from './Components/BikeRoutes';
 import BikeRoute from './Components/BikeRoute'; 
 import GroupRide from './Components/GroupRide'; 
 import GroupForm from './Components/GroupForm';  
+import EditProfile from './Components/EditProfile';
 import axios from 'axios'; 
 
 /*
@@ -16,7 +17,7 @@ import axios from 'axios';
 SATURDAY
 --------------------------
 [X] List of Upcoming Rides in Profile
-    [] FIX - Populating attending and bike route ****
+    [X] FIX - Populating attending and bike route 
 Done By 1PM -------------
 
 
@@ -41,32 +42,31 @@ Done by Sunday 12pm -------------
 [X] Invite to Ride  
 Done By Sunday -------------
 
-[] Commenting
+[] Code Commenting
 [X] Sign Out Button on Home Page
-[] Transition Modal
-[] Delete Group
-    [] Need to add group leader to group collection
-[] Update profile, add routes
+[X] Transition Modal
+[] Update profiles, add routes
+[] Clean up SCSS (Place all into one file)
 [] Edit Profile
+[X] Delete Group
 Done by Monday -------------
 
-TO FIX
-[] BikeRoutes.js map **
-[] Populating attending and bike route **
-
-
-STRETCH
-[] Delete group
+FUTURE GOALS
+[] Login 
+[] Accessibility
 [] Messaging 
 [] Group Ride Comments 
 [] Make private social groups and schedule rides
 [] Users can draw their own routes
+[] Sorting by Date
+[] Filter Group List
 
 */
 
 class App extends Component {
     state = {
         cyclists: [],
+        isLoggedIn: true,
         loggedInAs: "5c92d64d7214992360212833",
         user: {},
         bikeRoutes: []
@@ -100,7 +100,6 @@ class App extends Component {
             .catch(error => {
                 console.log(error);
             });
-
     }
     render() {
         return (
@@ -110,12 +109,13 @@ class App extends Component {
                         <Route exact path="/" component={Login}/>
                         <Route exact path="/home" render={props => (<Home {...props} user={this.state.user} />)} />/>
                         <Route exact path="/cyclists" render={props => (<CyclistList {...props} cyclistList={this.state.cyclists}/>)} />
-                        <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user}/>)} />
+                        <Route exact path="/cyclists/:cyclistId" render={props => (<Profile {...props} loggedInAs={this.state.loggedInAs} isLoggedIn={this.state.isLoggedIn} currentUser={this.state.user}/>)} />
                         <Route exact path="/groups" render={props => (<GroupRides {...props} groupList={this.state.groupList} />)} />
                         <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />
                         <Route exact path="/creategroup" render={props => (<GroupForm {...props} loggedInAs={this.state.loggedInAs} />)} />
+                        <Route exact path="/editprofile" render={props => (<EditProfile {...props} loggedInAs={this.state.loggedInAs} user={this.state.user}/>)} />
                     </Switch>
                 </div>
             </Router>

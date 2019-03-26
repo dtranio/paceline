@@ -1,6 +1,7 @@
 .groupList {
     @include headerSetup();
-    height: 100vh;
+    height: 100%;
+    padding-bottom: 300px;
     .groupContainer {
         .groupSelection {
             height: 125px;

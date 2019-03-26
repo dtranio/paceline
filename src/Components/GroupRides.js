@@ -36,18 +36,6 @@ export default class GroupRides extends Component {
                                                     id={group._id} />
                                             </Link>;
                     })}
-                    {/* <Link to='/groups/G1'>
-                        <GroupSelect title="Da Champs" route="Leslie Street Spit" riders="2" date="04-05-2019"/>
-                    </Link>
-                    <Link to='/groups/G1'>
-                        <GroupSelect title="Afternoon Ride" route="Scarborough Bluffs" riders="3" date="04-15-2019"/>
-                    </Link>
-                    <Link to='/groups/G1'>
-                        <GroupSelect title="Uptown to Downtown" route="Beltline-Lower Don Valley" riders="4" date="04-25-2019"/>
-                    </Link>
-                    <Link to='/groups/G1'>
-                        <GroupSelect title="Waterfront Exploration" route="Martin Goodman Trail" riders="6" date="05-04-2019"/>
-                    </Link> */}
                 </div>
                 <div className="groupList__button">
                     <Link to='/creategroup'>
