@@ -85,7 +85,7 @@ export default class EditProfile extends Component {
                                         <textarea type="text" defaultValue={this.props.user.bio} name="description__input" id="description__input" resize="none" maxLength="250" required/>
                                     </div>
                                     <div className="editProfileForm__interests">
-                                        <label htmlFor="interests__input">Bike Owned</label>
+                                        <label htmlFor="interests__input">Interests</label>
                                         <input type="text" defaultValue={this.props.user.interests} name="interests__input" id="interests__input" maxLength="150" required/>
                                     </div>
                                     <div className="editProfileForm__submit">

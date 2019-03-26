@@ -31,7 +31,7 @@ export default class Profile extends Component {
             })
             .catch(error => {
                 console.log(error);
-            });
+            });    
     }
     componentDidUpdate() {
         if (this.state.currentUrl !== this.props.match.params.cyclistId) {
@@ -42,6 +42,7 @@ export default class Profile extends Component {
                         currentUrl: this.props.match.params.cyclistId,
                         loaded: true
                     });
+                    this.checkFriendship();
                     window.scroll(0,0);
                 });
             }

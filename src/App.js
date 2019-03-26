@@ -35,27 +35,30 @@ Done By 6PM -------------
 
 
 [X] Form to Create a Group 
-    [] Handling Dates
-    [] Form Validation
 Done by Sunday 12pm -------------
 
 [X] Invite to Ride  
 Done By Sunday -------------
 
-[] Code Commenting
 [X] Sign Out Button on Home Page
 [X] Transition Modal
-[] Update profiles, add routes
-[] Clean up SCSS (Place all into one file)
 [X] Edit Profile
 [X] Delete Group
-[] On Group Create - how to handle redirect
 Done by Monday -------------
+
+
+[] Code Commenting
+[] On Group Create - how to handle redirect
+[] Update profiles, add routes
+[] Clean up SCSS (Place all into one file)
+Done by Tuesday 6pm -------------
 
 FUTURE GOALS
 [] Login 
 [] Accessibility
-[] Messaging 
+[] Messaging
+[] Handling Dates and Sort
+[] Javascript Form Validation  
 [] Group Ride Comments 
 [] Make private social groups and schedule rides
 [] Users can draw their own routes
@@ -120,7 +123,7 @@ class App extends Component {
                         <Route exact path="/groups/:groupId" render={props => (<GroupRide {...props} loggedInAs={this.state.loggedInAs} currentUser={this.state.user} />)} />
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />
-                        <Route exact path="/creategroup" render={props => (<GroupForm {...props} loggedInAs={this.state.loggedInAs} />)} />
+                        <Route exact path="/creategroup" render={props => (<GroupForm {...props} loggedInAs={this.state.loggedInAs} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/editprofile" render={props => (<EditProfile {...props} loggedInAs={this.state.loggedInAs} user={this.state.user} updateUser={this.updateUser} />)} />
                     </Switch>
                 </div>

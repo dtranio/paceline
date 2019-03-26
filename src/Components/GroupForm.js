@@ -10,18 +10,28 @@ export default class GroupForm extends Component {
         super();
         this.state = {
             formSubmitted: false,
+            selectedRouteImage: ""
         }
         this.groupForm = React.createRef();
     }
     componentDidMount() {
         this.setState({
-            formSubmitted: false
+            formSubmitted: false,
+            selectedRouteImage: "/Assets/images/BikeRoutes/beltline.jpg"
         });
     }
     handleChange = date => {
         this.setState({
             startDate: date
         });
+    }
+    handleImageChange = () => {
+        let foundRoute = this.props.routeList.find(route => {
+            return route._id === this.groupForm.current.groupRoute__input.value
+        })
+        this.setState({
+            selectedRouteImage: foundRoute.route_pic_url
+        })
     }
     submitHandler = e => {
         e.preventDefault();
@@ -48,6 +58,7 @@ export default class GroupForm extends Component {
         axios(config) 
             .then(response => {
                 form.reset();
+                window.location = "/groups";
             })
             .catch(error => {
                 console.log(error)
@@ -63,7 +74,7 @@ export default class GroupForm extends Component {
                                 <h1 className="home__title">Create a Group</h1>
                             </div>
                             <div className="formContainer__image wrapper" style={props}>
-                                <img src="/Assets/images/groupform2.jpg" alt="two cyclists in sunset"/>
+                                <img src={this.state.selectedRouteImage} alt="two cyclists in sunset"/>
                             </div>
                             <form onSubmit={this.submitHandler} ref={this.groupForm} className="groupForm wrapper" style={props}>
                                 <div className="groupForm__groupName">
@@ -76,15 +87,14 @@ export default class GroupForm extends Component {
                                 </div>
                                 <div className="groupForm__routeSelect">
                                     <label htmlFor="groupForm__route">Choose Route</label>
-                                        <select name="groupRoute__input" id="groupRoute__input">
-                                            <option value="5c917be8b562941b60c60b45">Beltline-Lower Don Valley</option>
-                                            <option value="5c917f57018c4123a8bac648">Leslie Street Spit</option>
-                                            <option value="5c9181df2171e21d60a53c95">Martin Goodman Trail</option>
-                                            <option value="5c9184c7aa7c1c05ac5294fc">Scarborough Bluffs</option>
+                                        <select name="groupRoute__input" id="groupRoute__input" onChange={this.handleImageChange}>
+                                            {this.props.routeList.map(route => {
+                                                return <option value={route._id}>{route.route_name}</option>
+                                            })}
                                         </select>
                                 </div>
                                 <div className="groupForm__groupMeetupSpot">
-                                    <label htmlFor="groupMeetup__input">Determine Meetup Location</label>
+                                    <label htmlFor="groupMeetup__input">Meetup Location</label>
                                     <input required type="text" placeholder="Meetup Spot" name="groupMeetup__input" id="groupMeetup__input"/>
                                 </div>
                                 <div className="groupForm__groupDateTime">

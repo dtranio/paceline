@@ -27,8 +27,7 @@ export default class GroupRide extends Component {
                     groupDetails: group.data,
                     loaded: true
                 });
-                this.checkJoined()
-                console.log(this.state.groupDetails)
+                this.checkJoined();
                 if (this.props.loggedInAs === this.state.groupDetails.created_by._id) {
                     this.setState({
                         isGroupLeader: true
