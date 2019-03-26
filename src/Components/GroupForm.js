@@ -89,7 +89,7 @@ export default class GroupForm extends Component {
                                     <label htmlFor="groupForm__route">Choose Route</label>
                                         <select name="groupRoute__input" id="groupRoute__input" onChange={this.handleImageChange}>
                                             {this.props.routeList.map(route => {
-                                                return <option value={route._id}>{route.route_name}</option>
+                                                return <option value={route._id} key={route._id}>{route.route_name}</option>
                                             })}
                                         </select>
                                 </div>

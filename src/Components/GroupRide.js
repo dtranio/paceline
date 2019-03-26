@@ -309,7 +309,7 @@ export default class GroupRide extends Component {
                                         region={cyclist.region}/>;
                         })}
                     </div>
-                    {this.state.isGroupLeader ? 
+                    {this.state.isGroupLeader && this.state.joined ? 
                         <div className="rideDetails__delete wrapper">
                             <button onClick={this.deleteGroup}>Delete Group</button>
                         </div>
