@@ -20,6 +20,7 @@ export default class GroupRide extends Component {
         isGroupLeader: false
     }
     componentDidMount() {
+        Modal.setAppElement('body');
         axios.get(`http://localhost:8080/groups/${this.props.match.params.groupId}`)
             .then(group => {
                 this.setState({
@@ -29,13 +30,11 @@ export default class GroupRide extends Component {
                 this.checkJoined()
                 console.log(this.state.groupDetails)
                 if (this.props.loggedInAs === this.state.groupDetails.created_by._id) {
-                    console.log("you da leader")
                     this.setState({
                         isGroupLeader: true
                     })
                 }
                 else {
-                    console.log("you not da leader")
                     this.setState({
                         isGroupLeader: false
                     })
@@ -206,7 +205,7 @@ export default class GroupRide extends Component {
     }
     render() {
         if (this.state.loaded) {
-            const {group_name, description, meetup_date, meetup_spot, attending} = this.state.groupDetails;
+            const {group_name, description, meetup_date, meetup_spot, attending, created_by} = this.state.groupDetails;
             const {center, route_name, route_pic_url, _id} = this.state.groupDetails.bike_route;
             // const DirectionsService = new google.maps.DirectionsService();
             // DirectionsService.route({   
@@ -265,6 +264,8 @@ export default class GroupRide extends Component {
                             <Select position="selection__titleRight" imageUrl={route_pic_url} title={route_name}/>
                         </Link>
                         <div className="groupDetails__description">
+                            <h2>Group Leader</h2>
+                            <p>{created_by.first_name}</p>
                             <h2>Description</h2>
                             <p>{description}</p>
                             <h2>Date & Time</h2>

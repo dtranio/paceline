@@ -47,8 +47,9 @@ Done By Sunday -------------
 [X] Transition Modal
 [] Update profiles, add routes
 [] Clean up SCSS (Place all into one file)
-[] Edit Profile
+[X] Edit Profile
 [X] Delete Group
+[] On Group Create - how to handle redirect
 Done by Monday -------------
 
 FUTURE GOALS
@@ -101,6 +102,11 @@ class App extends Component {
                 console.log(error);
             });
     }
+    updateUser = data => {
+        this.setState({
+            user: data
+        });
+    }
     render() {
         return (
             <Router>
@@ -115,7 +121,7 @@ class App extends Component {
                         <Route exact path="/bikeroutes" render={props => (<BikeRoutes {...props} routeList={this.state.bikeRoutes} />)} />
                         <Route exact path="/bikeroutes/:routeId" render={props => (<BikeRoute {...props} />)} />
                         <Route exact path="/creategroup" render={props => (<GroupForm {...props} loggedInAs={this.state.loggedInAs} />)} />
-                        <Route exact path="/editprofile" render={props => (<EditProfile {...props} loggedInAs={this.state.loggedInAs} user={this.state.user}/>)} />
+                        <Route exact path="/editprofile" render={props => (<EditProfile {...props} loggedInAs={this.state.loggedInAs} user={this.state.user} updateUser={this.updateUser} />)} />
                     </Switch>
                 </div>
             </Router>

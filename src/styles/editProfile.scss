@@ -1,11 +1,12 @@
 .editProfile {
     background: $background;
-    height: 100vh;
+    height: 120vh;
+    padding-bottom: 100px;
     &__header {
         display: flex;
         align-items: center;
         img {
-            width: 8%;
+            width: 6%;
             margin-right: 15px; 
         }
     }
@@ -60,16 +61,63 @@
         }
         input {
             font-family: $font;
-            border-radius: 2px;
             padding-left: 10px;
-            border: none;
-            height: 25px;
         }
         &__bikeOwned {
-            color: white;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
+            input {
+                border: none;
+                border-radius: 2px;
+                height: 30px;
+            }
+        }
+        &__interests {
+            input {
+                border: none;
+                border-radius: 2px;
+                height: 30px;
+            }
+        }
+        &__name {
+            input {
+                border: none;
+                border-radius: 2px;
+                height: 30px;
+            }
+        }
+        &__region{
+            input {
+                border: none;
+                border-radius: 2px;
+                height: 30px;
+            }
+        }
+        &__email{
+            input {
+                border: none;
+                border-radius: 2px;
+                height: 30px;
+            }
+        }
+        &__submit {
+            align-items: center;
+            h2 {
+                margin: 0;
+                color: white;
+            }
+            &--button {
+                margin-top: 20px;
+                width: 130px;
+                padding: 10px;
+                border-radius: 4px;
+                height: 40px;
+                background: steelblue;
+                border: 1px solid white;
+                box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+                color: white;
+                &:hover {
+                    background: tomato;
+                }
+            }
         }
     }
 }

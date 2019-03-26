@@ -8,7 +8,15 @@ import "react-datepicker/dist/react-datepicker.css";
 export default class GroupForm extends Component {
     constructor(){
         super();
+        this.state = {
+            formSubmitted: false,
+        }
         this.groupForm = React.createRef();
+    }
+    componentDidMount() {
+        this.setState({
+            formSubmitted: false
+        });
     }
     handleChange = date => {
         this.setState({
@@ -17,7 +25,7 @@ export default class GroupForm extends Component {
     }
     submitHandler = e => {
         e.preventDefault();
-        let form = this.groupForm.current
+        const form = this.groupForm.current
         let formData = {
             groupName: form.groupName__input.value,
             groupDescription: form.groupDescription__input.value,
@@ -40,7 +48,6 @@ export default class GroupForm extends Component {
         axios(config) 
             .then(response => {
                 form.reset();
-                window.location = `/groups/${response.data._id}`;
             })
             .catch(error => {
                 console.log(error)
@@ -94,6 +101,7 @@ export default class GroupForm extends Component {
                                             />
                                 </div>
                                 <div className="groupForm__submit">
+                                    <h2>{this.state.formSubmitted ? "Group Created" : null}</h2> 
                                     <input type="submit" className="groupForm__submit--button" value="Submit Group"/>
                                 </div>
                             </form>
