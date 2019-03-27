@@ -14,6 +14,7 @@ export default class BikeRoutes extends Component {
                                 <Link to='/home'><img src="/Assets/images/Icons/back-arrow.png" style={props} alt="back arrow"/></Link>
                                 <h1 className="home__title" style={props}>Popular Bike Routes</h1>
                             </div>
+                            {/* Render route list selection cards */}
                             {this.props.routeList.map(route => {
                                 return  <Link to={`/bikeroutes/${route._id}`} key={route._id} style={props}>
                                             <Select  

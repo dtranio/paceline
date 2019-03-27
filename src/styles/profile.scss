@@ -1,6 +1,8 @@
 .profile {
     @include headerSetup();
     position: relative;
+    height: 100%;
+    padding-bottom: 50px;
     &--back {
         height: 260px;
         width: 100%;
@@ -55,17 +57,7 @@
         margin-top: -18px;
         text-decoration: none;
         &--style {
-            width: 130px;
-            padding: 10px;
-            border-radius: 4px;
-            height: 35px;
-            background: steelblue;
-            border: 1px solid white;
-            box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
-            color: white;
-            &:hover {
-                background: tomato;
-            }
+            @include buttonStyle();
         }
         &--add {
             margin-right: 20px;
@@ -77,11 +69,12 @@
             font-weight: 300;
             font-size: 0.9rem;
             color: white;
+            padding-right: 10px;
         }
         &__bikeOwned {
             display: flex;
             margin-top: 25px;
-            height: 50px;
+            height: 100%;
             box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
             img {
                 padding-top: 7px;
@@ -97,7 +90,7 @@
         &__bio {
             display: flex;
             margin-top: 20px;
-            height: 120px;
+            height: 100%;
             box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
             &--container {
                 margin-right: 25px;
@@ -116,7 +109,7 @@
         &__interests {
             display: flex;
             margin-top: 20px;
-            height: 90px;
+            height: 100%;
             box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
             &--container {
                 margin-right: 25px;
@@ -165,7 +158,7 @@
             overflow: hidden;
             width: 100%;
             position: relative;
-            border-radius: 10px;
+            border-radius: 5px;
             img {
                 width: 100%;
                 height: 100%;
@@ -174,27 +167,10 @@
             }
         }
         .groupSelection {
-            height: 125px;
-            width: 100%;
-            margin-bottom: 15px;
-            border: 1px solid white;
-            border-radius: 10px;
-            position: relative;
-            &:before {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                z-index: 1;
-                background: rgba(black, 0.2);
-            }
+            @include selectionCard();
             img {
+                box-sizing: border-box;
                 width: 37%;
-                height: 125px;
-                object-fit: cover;
-                overflow: hidden;
                 border-right: 1px solid white;
             }
             &__groupName {

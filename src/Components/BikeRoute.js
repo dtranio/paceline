@@ -20,7 +20,9 @@ export default class BikeRoute extends Component {
     }
     render() {
         const {bike_type, center, distance, route_description, route_gallery_url, route_gallery_url2, route_name, route_pic_url} = this.state.routeDetails;
+        // New request to Google Maps' Direction Service API
         const DirectionsService = new google.maps.DirectionsService();
+        // Requesting optimal route from origin to destination using a bike
         DirectionsService.route({   
             origin: this.state.routeDetails.origin, 
             destination: this.state.routeDetails.destination,  
@@ -28,6 +30,7 @@ export default class BikeRoute extends Component {
             },  
             (response, status) => {   
                 if (status === google.maps.DirectionsStatus.OK) {   
+                    // Obtain array of coordinates and store them in state
                     const coordinates = response.routes[0].overview_path;   
                     this.setState({
                         pathCoordinates: coordinates,
@@ -49,6 +52,7 @@ export default class BikeRoute extends Component {
                     fullscreenControl: false
               }}
             >
+                {/* Draw path using array of coordinates */}
                 <Polyline
                     path={this.state.pathCoordinates}
                     geodesic={true}
@@ -62,6 +66,7 @@ export default class BikeRoute extends Component {
         ));
         return (
             <div className="bikeRoute">
+                {/* Render the Google Map component */}
                 <Map
                     containerElement={ <div style={{ height: `300px`, width: '100%' }} /> }
                     mapElement={ <div style={{ height: `100%` }} /> }

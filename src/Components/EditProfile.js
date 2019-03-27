@@ -7,6 +7,7 @@ import axios from 'axios';
 export default class EditProfile extends Component {
     constructor(){
         super();
+        // Form ref
         this.profileForm = React.createRef();
         this.state = {
             formSubmitted: false
@@ -42,6 +43,7 @@ export default class EditProfile extends Component {
                 this.setState({
                     formSubmitted: true
                 });
+                // Send data back up to App component so it can refresh the user's information
                 this.props.updateUser(response.data)
             })
             .catch(error => {
@@ -89,6 +91,7 @@ export default class EditProfile extends Component {
                                         <input type="text" defaultValue={this.props.user.interests} name="interests__input" id="interests__input" maxLength="150" required/>
                                     </div>
                                     <div className="editProfileForm__submit">
+                                        {/* Show confirmation message when user has submitted the group form */}
                                         {this.state.formSubmitted ? <h2>Profile Updated</h2> : null}
                                         <input type="submit" className="editProfileForm__submit--button" value="Update Profile"/>
                                     </div>

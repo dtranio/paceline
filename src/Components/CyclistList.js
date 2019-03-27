@@ -14,6 +14,7 @@ export default class CyclistList extends Component {
                 <Spring from={{ marginTop: -150 }} to={{ marginTop: 0 }}>
                     { props => (
                         <div className="cyclers wrapper">
+                            {/* Render list of cyclists */}
                             {this.props.cyclistList.map(cyclist => {
                                 return  <Cyclist 
                                             name={cyclist.first_name} 

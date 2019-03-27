@@ -12,61 +12,6 @@ import GroupForm from './Components/GroupForm';
 import EditProfile from './Components/EditProfile';
 import axios from 'axios'; 
 
-/*
-
-SATURDAY
---------------------------
-[X] List of Upcoming Rides in Profile
-    [X] FIX - Populating attending and bike route 
-Done By 1PM -------------
-
-
-[X] Remove self from cyclist array
-[X] Hide add friend/message button on own profile
-[X] Hide my upcoming rides on other people's profile
-Done By 2PM -------------
-
-
-[X] Remove/Add Friend
-[X] Leave Ride 
-[X] Join Ride
-    [X] FIX - Number of Riders Count
-Done By 6PM -------------
-
-
-[X] Form to Create a Group 
-Done by Sunday 12pm -------------
-
-[X] Invite to Ride  
-Done By Sunday -------------
-
-[X] Sign Out Button on Home Page
-[X] Transition Modal
-[X] Edit Profile
-[X] Delete Group
-Done by Monday -------------
-
-
-[] Code Commenting
-[] On Group Create - how to handle redirect
-[] Update profiles, add routes
-[] Clean up SCSS (Place all into one file)
-Done by Tuesday 6pm -------------
-
-FUTURE GOALS
-[] Login 
-[] Accessibility
-[] Messaging
-[] Handling Dates and Sort
-[] Javascript Form Validation  
-[] Group Ride Comments 
-[] Make private social groups and schedule rides
-[] Users can draw their own routes
-[] Sorting by Date
-[] Filter Group List
-
-*/
-
 class App extends Component {
     state = {
         cyclists: [],
@@ -81,11 +26,12 @@ class App extends Component {
                 this.setState({
                     cyclists: cyclistsList.data,
                 });
+                // Find logged in cyclist information and remove them from cyclist list
                 let foundUser = this.state.cyclists.find(cyclist => {
-                    return cyclist._id === "5c92d64d7214992360212833";
+                    return cyclist._id === this.state.loggedInAs;
                 })
                 let filteredUsers = this.state.cyclists.filter(cyclist => {
-                    return cyclist._id !== "5c92d64d7214992360212833";
+                    return cyclist._id !== this.state.loggedInAs;
                 })
                 this.setState({
                     user: foundUser,
@@ -105,6 +51,7 @@ class App extends Component {
                 console.log(error);
             });
     }
+    // Retrieve updated profile information about the user and update their profile
     updateUser = data => {
         this.setState({
             user: data

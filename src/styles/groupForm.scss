@@ -5,7 +5,7 @@
     &__image {
         height: 150px;
         position: relative;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         img {
             border-radius: 5px;
             box-sizing: border-box;
@@ -48,16 +48,10 @@
             padding-left: 10px;
         }
         &__groupName {
-            input {
-                height: 25px;
-                border: none;
-            }
+            @include groupInputStyle();
         }
         &__groupMeetupSpot {
-            input {
-                height: 25px;
-                border: none;
-            }
+            @include groupInputStyle();
         }
         &__routeSelect {
             select {
@@ -86,19 +80,9 @@
                 color: white
             }
             &--button {
+                @include buttonStyle();
+                height: 40px;
                 text-align: center;
-                text-decoration: none;
-                width: 130px;
-                padding: 10px;
-                border-radius: 4px;
-                height: 50px;
-                background: steelblue;
-                border: 1px solid white;
-                box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
-                color: white;
-                &:hover {
-                    background: tomato;
-                }
             }
         }
     }

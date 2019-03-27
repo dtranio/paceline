@@ -62,9 +62,32 @@ $wrapDefault: 90%;
 
 @mixin inputStyle {
     input {
+        font-family: $font;
+        padding-left: 10px;
         border: none;
         border-radius: 2px;
         height: 30px;
+    }
+}
+
+@mixin groupInputStyle {
+    input {
+        height: 25px;
+        border: none;
+    }
+}
+
+@mixin buttonStyle {
+    width: 130px;
+    padding: 10px;
+    border-radius: 4px;
+    height: 35px;
+    background: steelblue;
+    border: 1px solid white;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+    &:hover {
+        background: tomato;
     }
 }
 
