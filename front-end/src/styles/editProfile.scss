@@ -1,0 +1,52 @@
+.editProfile {
+    background: $background;
+    height: 120vh;
+    padding-bottom: 100px;
+    &__header {
+        display: flex;
+        align-items: center;
+        img {
+            width: 6%;
+            margin-right: 15px; 
+        }
+    }
+    &__bannerContainer {
+        position: relative;
+        .selection {
+           @include selectionCard();
+            &__titleRight {
+                @include choiceText();
+                right: 3%;
+            }
+        }
+    }
+    .editProfileForm {
+        & form > div {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            @include inputStyle();
+        }
+        textarea {
+            font-family: $font;
+            border-radius: 2px;
+            padding: 10px;
+            height: 75px;
+        }
+        label {
+            color: white;
+            margin-bottom: 5px;
+        }
+        &__submit {
+            align-items: center;
+            h2 {
+                margin: 0;
+                margin-bottom: 20px;
+                color: white;
+            }
+            &--button {
+                @include buttonStyle();
+            }
+        }
+    }
+}
